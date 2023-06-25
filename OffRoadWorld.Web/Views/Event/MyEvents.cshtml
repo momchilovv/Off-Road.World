@@ -1,0 +1,36 @@
+﻿@model List<EventDetailsViewModel>
+@{
+    ViewBag.Title = "My Events";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="text-center row">
+    @if (Model.Any())
+    {
+        @foreach (var _event in Model)
+        {
+            <div class="card col-4" style="width: 20rem; ">
+                <div class="card-body">
+
+                    <h5 class="card-title mt-1">@_event.Title</h5>
+                    <p class="mb-0">Start: @_event.Start</p>
+                    <p class="mb-0">End: @_event.End</p>
+                    <p>Category: @_event.Category</p>
+                </div>
+
+                <form method="get" class="input-group-sm" asp-controller="Event" asp-action="Delete" asp-route-id="@_event.Id">
+                    <input type="submit" value="Delete Event" class="fs-6 btn btn-danger mb-3 p-2" />
+                </form>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="text-center">
+            <p class ="display-6">You have no owned events.</p>
+            <p class="display-7">You can add one by clicking <a href="/Event/Add">here</a>!</p>
+        </div>
+    }
+</div>
