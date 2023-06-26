@@ -137,5 +137,23 @@ namespace OffRoadWorld.Web.Controllers
 
             return View(model);
         }
+
+        public async Task<IActionResult> LeaveEvent(int id)
+        {
+            var _event = eventService.GetDetailsById(id);
+
+            await eventService.LeaveEventAsync(GetUserId(), _event);
+
+            TempData[SuccessMessage] = $"You have left {_event.Title} event!";
+
+            return RedirectToAction(nameof(Joined));
+        }
+
+        public async Task<IActionResult> Joined()
+        {
+            var model = await eventService.GetJoinedEventsAsync(GetUserId());
+
+            return View(model);
+        }
     }
 }

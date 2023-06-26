@@ -116,22 +116,6 @@ namespace OffRoadWorld.Services.Data.Services
                 .FirstAsync();
         }
 
-        public async Task<ICollection<EventViewModel>> GetJoinedEventsAsync(string userId)
-        {
-            return await dbContext.EventParticipants
-                .Where(ep => ep.ParticipantId == userId)
-                .Select(ep => new EventViewModel()
-                {
-                    Id = ep.EventId,
-                    Title = ep.Event.Title,
-                    Start = ep.Event.Start,
-                    End = ep.Event.End,
-                    Category = ep.Event.Category.Name,
-                    Owner = ep.Event.Owner.UserName
-                })
-                .ToListAsync();
-        }
-
         public async Task<ICollection<EventDetailsViewModel>> GetMyEventsAsync(string userId)
         {
             return await dbContext.Events
@@ -174,6 +158,34 @@ namespace OffRoadWorld.Services.Data.Services
                     ParticipantId = userId,
                     EventId = model.Id
                 });
+
+                await dbContext.SaveChangesAsync();
+            }
+        }
+
+        public async Task<ICollection<EventViewModel>> GetJoinedEventsAsync(string userId)
+        {
+            return await dbContext.EventParticipants
+                .Where(e => e.ParticipantId == userId)
+                .Select(p => new EventViewModel()
+                {
+                    Id = p.Event.Id,
+                    Title = p.Event.Title,
+                    Start = p.Event.Start,
+                    End = p.Event.End,
+                    Category = p.Event.Category.Name
+                })
+                .ToListAsync();
+        }
+
+        public async Task LeaveEventAsync(string userId, EventViewModel model)
+        {
+            var _event = await dbContext.EventParticipants
+                .FirstOrDefaultAsync(ep => ep.ParticipantId == userId && ep.EventId == model.Id);
+
+            if (_event != null)
+            {
+                dbContext.EventParticipants.Remove(_event);
 
                 await dbContext.SaveChangesAsync();
             }

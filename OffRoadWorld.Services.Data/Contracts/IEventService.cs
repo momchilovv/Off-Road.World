@@ -9,6 +9,8 @@ namespace OffRoadWorld.Services.Data.Contracts
 
         Task<ICollection<CategoryModel>> GetAllCategoriesAsync();
 
+        Task<ICollection<EventViewModel>> GetJoinedEventsAsync(string userId);
+
         Task CreateEventAsync(EventFormModel model);
 
         EventDetailsViewModel GetDetailsById(int id);
@@ -17,7 +19,7 @@ namespace OffRoadWorld.Services.Data.Contracts
 
         Task JoinEventAsync(string userId, EventViewModel model);
 
-        Task<ICollection<EventViewModel>> GetJoinedEventsAsync(string userId);
+        Task LeaveEventAsync(string userId, EventViewModel model);
 
         Task DeleteEventAsync(int id);
 
