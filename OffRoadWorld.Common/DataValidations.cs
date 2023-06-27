@@ -11,6 +11,9 @@ namespace OffRoadWorld.Common
 
             public const int DescriptionMinLength = 25;
             public const int DescriptionMaxLength = 500;
+
+            public const int AddressMinLength = 6;
+            public const int AddressMaxLength = 50;
         }
 
         public class Category

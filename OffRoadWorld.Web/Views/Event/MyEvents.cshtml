@@ -15,8 +15,9 @@
                 <div class="card-body">
 
                     <h5 class="card-title mt-1">@_event.Title</h5>
-                    <p class="mb-0">Start: @_event.Start</p>
-                    <p class="mb-0">End: @_event.End</p>
+                    <p class="mb-0">Start: @_event.Start.ToString("dd-MM-yyyy HH:mm")</p>
+                    <p class="mb-0">Location: @_event.Location</p>
+                    <p class="mb-0">Address: @_event.Address</p>
                     <p>Category: @_event.Category</p>
                 </div>
 

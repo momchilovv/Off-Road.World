@@ -12,6 +12,8 @@ namespace OffRoadWorld.Web.ViewModels.Event
 
         public int CategoryId { get; set; }
 
+        public string Address { get; set; } = null!;
+
         public ICollection<CategoryModel> Categories { get; set; } = new List<CategoryModel>();
     }
 }

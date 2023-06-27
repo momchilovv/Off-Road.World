@@ -20,7 +20,14 @@ namespace OffRoadWorld.Web.ViewModels.Event
         public DateTime Start { get; set; }
 
         [Required]
-        public DateTime End { get; set; }
+        public string Country { get; set; }
+
+        [Required]
+        public string City { get; set; }
+
+        [Required]
+        [StringLength(AddressMaxLength, MinimumLength = AddressMinLength)]
+        public string Address { get; set; }
 
         [Required]
         public int CategoryId { get; set; }

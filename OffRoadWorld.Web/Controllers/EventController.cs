@@ -66,11 +66,6 @@ namespace OffRoadWorld.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, EventFormModel model)
         {
-            if (!GetUserId().Equals(model.OwnerId))
-            {
-                return RedirectToAction(nameof(All));
-            }
-
             await eventService.EditEventAsync(id, model);
 
             return RedirectToAction(nameof(All));
@@ -100,9 +95,10 @@ namespace OffRoadWorld.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(EventDetailsViewModel model)
         {
-            //TODO: Add validation.
+            var _event = eventService.GetDetailsById(model.Id);
             await eventService.DeleteEventAsync(model.Id);
-            TempData[SuccessMessage] = $"You have successfully deleted this event!";
+
+            TempData[SuccessMessage] = $"You have successfully deleted {_event.Title} event!";
 
             return RedirectToAction(nameof(All));
         }

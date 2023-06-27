@@ -33,8 +33,14 @@ namespace OffRoadWorld.Data.Models
         public DateTime Start { get; set; }
 
         [Required]
-        [DisplayFormat(DataFormatString = "dd-MM-yyyy HH:mm")]
-        public DateTime End { get; set; }
+        public string Country { get; set; }
+
+        [Required]
+        public string City { get; set; }
+
+        [Required]
+        [MaxLength(AddressMaxLength)]
+        public string Address { get; set; }
 
         [Required]
         public string OwnerId { get; set; }

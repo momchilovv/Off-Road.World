@@ -3,6 +3,49 @@
     ViewBag.Title = "Edit Info for an Event";
 }
 
+<script>
+    $(document).ready(function () {
+        var selectedCity = '@Model.City';
+
+        $('#CountryDropdown').change(function () {
+            var selectedCountry = $(this).val();
+
+            if (selectedCountry) {
+                var cities = {
+                    Bulgaria: ['Montana', 'Chiprovtsi', 'Vratsa', 'Pleven', 'Sofia'],
+                    Romania: ['Timisoara', 'Cluj-Napoca', 'Brasov', 'Iasi', 'Constanta'],
+                    Iceland: ['Reykjavik', 'Akureyri', 'Isafjordur', 'Egilsstadir', 'Hafnarfjordur'],
+                    Poland: ['Warsaw', 'Krakow', 'Gdansk', 'Poznan', 'Wroclaw'],
+                    Germany: ['Berlin', 'Munich', 'Hamburg', 'Frankfurt', 'Cologne']
+                };
+
+                var countryCities = cities[selectedCountry];
+                populateCityDropdown(countryCities);
+                $('#CityDropdownContainer').show();
+            } else {
+                $('#CityDropdown').empty();
+                $('#CityDropdownContainer').hide();
+            }
+        });
+
+        function populateCityDropdown(cityArray) {
+            var cityDropdown = $('#CityDropdown');
+            cityDropdown.empty();
+
+            $.each(cityArray, function (index, city) {
+                var option = $('<option>').val(city).text(city);
+
+                if (city === selectedCity) {
+                    option.attr('selected', 'selected');
+                }
+
+                cityDropdown.append(option);
+            });
+        }
+        $('#CountryDropdown').trigger('change');
+    });
+</script>
+
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
 
@@ -25,9 +68,24 @@
                 <span asp-validation-for="@Model.Start" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="@Model.End" class="form-label-add-edit">End</label>
-                <input asp-for="@Model.End" class="form-control" aria-required="true" value="@Model.End.ToString("yyyy-MM-dd H:mm")" />
-                <span asp-validation-for="@Model.End" class="text-danger"></span>
+                <label for="CountryDropdown">Country</label>
+                <select asp-for="@Model.Country" class="form-control" id="CountryDropdown">
+                    <option value="">Select a country</option>
+                    <option value="Bulgaria">Bulgaria</option>
+                    <option value="Romania">Romania</option>
+                    <option value="Iceland">Iceland</option>
+                    <option value="Poland">Poland</option>
+                    <option value="Germany">Germany</option>
+                </select>
+            </div>
+            <div class="mb-3" id="CityDropdownContainer">
+                <label for="CityDropdown">City</label>
+                <select asp-for="@Model.City" class="form-control" id="CityDropdown"></select>
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.Address" class="form-label-add-edit">Address</label>
+                <input asp-for="@Model.Address" class="form-control" aria-required="true" />
+                <span asp-validation-for="@Model.Address" class="text-danger"></span>
             </div>
             <div class="mb-3">
                 <label asp-for="@Model.CategoryId" class="form-label-add-edit">Catergory of event</label>

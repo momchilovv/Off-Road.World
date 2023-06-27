@@ -4,7 +4,6 @@ using OffRoadWorld.Data.Models;
 using OffRoadWorld.Services.Data.Contracts;
 using OffRoadWorld.Web.ViewModels.Category;
 using OffRoadWorld.Web.ViewModels.Event;
-using static OffRoadWorld.Common.DataValidations;
 using Event = OffRoadWorld.Data.Models.Event;
 
 namespace OffRoadWorld.Services.Data.Services
@@ -27,7 +26,7 @@ namespace OffRoadWorld.Services.Data.Services
                     Title = e.Title,
                     Category = e.Category.Name,
                     Start = e.Start,
-                    End = e.End,
+                    Location = $"{e.City}, {e.Country}",
                     Owner = e.Owner.UserName
                 })
                 .ToListAsync();
@@ -41,7 +40,9 @@ namespace OffRoadWorld.Services.Data.Services
                 Description = model.Description,
                 CreatedOn = DateTime.UtcNow,
                 Start = model.Start,
-                End = model.End,
+                Country = model.Country,
+                City = model.City,
+                Address = model.Address,
                 CategoryId = model.CategoryId,
                 OwnerId = model.OwnerId,
             };
@@ -57,7 +58,9 @@ namespace OffRoadWorld.Services.Data.Services
             _event!.Title = model.Title;
             _event.Description = model.Description;
             _event.Start = model.Start;
-            _event.End = model.End;
+            _event.Country = model.Country;
+            _event.City = model.City;
+            _event.Address = model.Address;
             _event.CategoryId = model.CategoryId;
 
             await dbContext.SaveChangesAsync();
@@ -85,7 +88,8 @@ namespace OffRoadWorld.Services.Data.Services
                     Description = e.Description,
                     CreatedOn = e.CreatedOn,
                     Start = e.Start,
-                    End = e.End,
+                    Location = $"{e.City}, {e.Country}",
+                    Address = e.Address,
                     Category = e.Category.Name,
                     Owner = e.Owner.UserName,
                     TotalParticipants = e.Participants.Count()
@@ -102,7 +106,9 @@ namespace OffRoadWorld.Services.Data.Services
                     Title = e.Title,
                     Description = e.Description,
                     Start = e.Start,
-                    End = e.End,
+                    Country = e.Country,
+                    City = e.City,
+                    Address = e.Address,
                     OwnerId = e.Owner.Id,
                     CategoryId = e.CategoryId,
                     Categories = dbContext.Categories
@@ -125,7 +131,8 @@ namespace OffRoadWorld.Services.Data.Services
                     Id = e.Id,
                     Title = e.Title,
                     Start = e.Start,
-                    End = e.End,
+                    Location = $"{e.City}, {e.Country}",
+                    Address = e.Address,
                     Category = e.Category.Name,
                     Owner = e.Owner.UserName
                 })
@@ -172,7 +179,7 @@ namespace OffRoadWorld.Services.Data.Services
                     Id = p.Event.Id,
                     Title = p.Event.Title,
                     Start = p.Event.Start,
-                    End = p.Event.End,
+                    Location = $"{p.Event.City}, {p.Event.Country}",
                     Category = p.Event.Category.Name
                 })
                 .ToListAsync();
