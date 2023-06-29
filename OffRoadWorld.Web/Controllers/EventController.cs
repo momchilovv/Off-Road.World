@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using OffRoadWorld.Data.Models;
 using OffRoadWorld.Services.Data.Contracts;
 using OffRoadWorld.Web.ViewModels.Event;
 using System.Security.Claims;
@@ -9,18 +11,20 @@ namespace OffRoadWorld.Web.Controllers
     public class EventController : BaseController
     {
         private readonly IEventService eventService;
+        private readonly UserManager<ApplicationUser> userManager;
 
         private string GetUserId() => User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-        public EventController(IEventService eventService)
+        public EventController(IEventService eventService, UserManager<ApplicationUser> userManager)
         {
             this.eventService = eventService;
+            this.userManager = userManager;
         }
 
         public async Task<IActionResult> All()
         {
             var model = await eventService.GetAllEventsAsync();
-
+    
             return View(model);
         }
 
@@ -107,6 +111,8 @@ namespace OffRoadWorld.Web.Controllers
         {
             var _event = eventService.GetDetailsById(id);
 
+            var user = await userManager.GetUserAsync(User);
+
             var model = await eventService.GetJoinedEventsAsync(GetUserId());
 
             if (model.Any(m => m.Id == id))
@@ -118,6 +124,12 @@ namespace OffRoadWorld.Web.Controllers
             if (_event.Owner == User.Identity!.Name)
             {
                 TempData[WarningMessage] = "You cannot participate in this event because you are the owner!";
+                return RedirectToAction(nameof(All));
+            }
+
+            if (!user.Vehicles.Any(v => v.CategoryId == _event.CategoryId))
+            {
+                TempData[WarningMessage] = $"You need to own {_event.Category} vehicle to participate in {_event.Title}!";
                 return RedirectToAction(nameof(All));
             }
 

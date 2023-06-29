@@ -30,14 +30,26 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Event" asp-action="All">Events</a>
                         </li>
                         <!--
-                            SECTION FOR TEMPORARY MENU
+                            START OF SECTION FOR TEMPORARY MENU
                         -->
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Event" asp-action="Add">Add Event</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Event" asp-action="Joined">Joined Events</a>
+                        </li>                    
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Vehicle" asp-action="All">Vehicles</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Vehicle" asp-action="Add">Add Vehicle</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Vehicle" asp-action="MyVehicles">My Vehicles</a>
+                        </li>
+                        <!--
+                            END OF SECTION FOR TEMPORARY MENU
+                        -->
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>

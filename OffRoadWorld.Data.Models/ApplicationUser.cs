@@ -9,6 +9,6 @@ namespace OffRoadWorld.Data.Models
             
         }
 
-        public ICollection<Vehicle> Vehicles { get; set; } = new HashSet<Vehicle>();
+        public ICollection<Vehicle> Vehicles { get; set; } = new List<Vehicle>();
     }
 }

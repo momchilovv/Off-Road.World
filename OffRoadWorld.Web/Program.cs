@@ -12,6 +12,7 @@ builder.Services.AddDbContext<OffRoadWorldDbContext>(options =>
     options.UseSqlServer(connectionString));
 
 builder.Services.AddScoped<IEventService, EventService>();
+builder.Services.AddScoped<IVehicleService, VehicleService>();
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 {

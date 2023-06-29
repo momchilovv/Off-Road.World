@@ -44,7 +44,7 @@ namespace OffRoadWorld.Services.Data.Services
                 City = model.City,
                 Address = model.Address,
                 CategoryId = model.CategoryId,
-                OwnerId = model.OwnerId,
+                OwnerId = model.OwnerId
             };
 
             await dbContext.Events.AddAsync(_event);

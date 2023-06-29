@@ -28,6 +28,11 @@ namespace OffRoadWorld.Data.Models
         public int ProductionYear { get; set; }
 
         [Required]
+        [MaxLength(UrlMaxLength)]
+        [Comment("Url image of the vehicle.")]
+        public string ImageUrl { get; set; } = null!;
+
+        [Required]
         [Comment("Category Id of vehicle.")]
         public int CategoryId { get; set; }
 

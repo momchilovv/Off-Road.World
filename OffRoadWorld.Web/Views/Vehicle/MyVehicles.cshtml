@@ -1,0 +1,36 @@
+﻿@model List<VehicleViewModel>
+@{
+    ViewBag.Title = "My Vehicles";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="text-center row">
+    @if (Model.Any())
+    {
+        @foreach (var vehicle in Model)
+        {
+            <div class="card col-4" style="width: 20rem; ">
+                <div class="card-body">
+
+                    <h5 class="card-title mt-1">@vehicle.Make</h5>
+                    <p class="mb-0">Model: @vehicle.Model</p>
+                    <p class="mb-0">Production Year: @vehicle.ProductionYear</p>
+                    <p>Category: @vehicle.Category</p>
+                </div>
+
+                <form method="get" class="input-group-sm" asp-controller="Event" asp-action="Delete" asp-route-id="@vehicle.Id">
+                    <input type="submit" value="Delete" class="fs-6 btn btn-danger mb-3 p-2" />
+                </form>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="text-center">
+            <p class="display-6">You have no owned vehicles.</p>
+            <p class="display-7">You can add one by clicking <a href="/Vehicle/Add">here</a>.</p>
+        </div>
+    }
+</div>

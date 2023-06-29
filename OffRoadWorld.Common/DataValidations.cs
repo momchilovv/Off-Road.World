@@ -32,6 +32,8 @@ namespace OffRoadWorld.Common
 
             public const int MinProductionYear = 1970;
             public const int MaxProductionYear = 2024;
+
+            public const int UrlMaxLength = 2048;
         }
     }
 }
