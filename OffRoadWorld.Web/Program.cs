@@ -3,6 +3,7 @@ using OffRoadWorld.Data;
 using OffRoadWorld.Data.Models;
 using OffRoadWorld.Services.Data.Contracts;
 using OffRoadWorld.Services.Data.Services;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,7 @@ builder.Services.AddDbContext<OffRoadWorldDbContext>(options =>
 
 builder.Services.AddScoped<IEventService, EventService>();
 builder.Services.AddScoped<IVehicleService, VehicleService>();
+builder.Services.AddScoped<IMarketplaceService, MarketplaceService>();
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 {

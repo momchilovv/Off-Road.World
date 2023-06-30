@@ -28,6 +28,19 @@ namespace OffRoadWorld.Data.Models
         public int ProductionYear { get; set; }
 
         [Required]
+        [MaxLength(MaxHorsePower)]
+        [Comment("Maximum horsepower a vehicle can have.")]
+        public int HorsePower { get; set; }
+
+        [MaxLength(MaxEngineCapacity)]
+        [Comment("Engine capacity measured in cubic centimeters.")]
+        public int? EngineCapacity { get; set; }
+
+        [Required]
+        [Comment("Price of the vehicle.")]
+        public decimal Price { get; set; }
+
+        [Required]
         [MaxLength(UrlMaxLength)]
         [Comment("Url image of the vehicle.")]
         public string ImageUrl { get; set; } = null!;

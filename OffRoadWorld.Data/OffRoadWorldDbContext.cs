@@ -18,8 +18,18 @@ namespace OffRoadWorld.Data
 
         public DbSet<EventParticipants> EventParticipants { get; set; }
 
+        public DbSet<Marketplace> Marketplace { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<Vehicle>()
+                .Property(v => v.Price)
+                .HasPrecision(18, 2);
+
+            builder.Entity<ApplicationUser>()
+                .Property(u => u.Balance)
+                .HasPrecision(18, 2);
+
             builder.Entity<EventParticipants>()
                 .HasKey(k => new { k.EventId, k.ParticipantId });
 
@@ -33,6 +43,11 @@ namespace OffRoadWorld.Data
                 .WithMany(e => e.Events)
                 .HasForeignKey(e => e.CategoryId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Marketplace>()
+                .HasOne(x => x.Vehicle)
+                .WithMany()
+                .HasForeignKey(x => x.VehicleId);
 
             base.OnModelCreating(builder);
         }

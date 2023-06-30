@@ -34,6 +34,12 @@ namespace OffRoadWorld.Common
             public const int MaxProductionYear = 2024;
 
             public const int UrlMaxLength = 2048;
+
+            public const int MinHorsePower = 1;
+            public const int MaxHorsePower = 1000;
+
+            public const int MinEngineCapacity = 49;
+            public const int MaxEngineCapacity = 5500;
         }
     }
 }

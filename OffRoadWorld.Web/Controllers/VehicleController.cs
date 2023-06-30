@@ -16,13 +16,6 @@ namespace OffRoadWorld.Web.Controllers
             this.vehicleService = vehicleService;
         }
 
-        public async Task<IActionResult> All()
-        {
-            var model = await vehicleService.GetAllVehiclesAsync();
-
-            return View(model);
-        }
-
         [HttpGet]
         public async Task<IActionResult> Add()
         {

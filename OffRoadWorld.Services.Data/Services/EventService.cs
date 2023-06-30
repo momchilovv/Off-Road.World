@@ -170,6 +170,13 @@ namespace OffRoadWorld.Services.Data.Services
             }
         }
 
+        public async Task<ICollection<Vehicle>> GetVehiclesAsync(string userId)
+        {
+            return await dbContext.Vehicles
+                .Where(v => v.OwnerId == userId)
+                .ToListAsync();
+        }
+
         public async Task<ICollection<EventViewModel>> GetJoinedEventsAsync(string userId)
         {
             return await dbContext.EventParticipants

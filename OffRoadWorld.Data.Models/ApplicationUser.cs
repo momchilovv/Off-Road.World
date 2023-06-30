@@ -9,6 +9,8 @@ namespace OffRoadWorld.Data.Models
             
         }
 
+        public decimal Balance { get; set; } = 0;
+
         public ICollection<Vehicle> Vehicles { get; set; } = new List<Vehicle>();
     }
 }

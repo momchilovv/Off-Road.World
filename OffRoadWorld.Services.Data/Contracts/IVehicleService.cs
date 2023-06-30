@@ -9,8 +9,6 @@ namespace OffRoadWorld.Services.Data.Contracts
 
         Task<ICollection<CategoryModel>> GetAllCategoriesAsync();
 
-        Task<ICollection<VehicleViewModel>> GetAllVehiclesAsync();
-
         Task<ICollection<VehicleViewModel>> GetMyVehiclesAsync(string userId);
     }
 }

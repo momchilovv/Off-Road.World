@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OffRoadWorld.Data;
 
@@ -11,9 +12,10 @@ using OffRoadWorld.Data;
 namespace OffRoadWorld.Data.Migrations
 {
     [DbContext(typeof(OffRoadWorldDbContext))]
-    partial class OffRoadWorldDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230629194220_AddedPriceToVehicleTable")]
+    partial class AddedPriceToVehicleTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -166,10 +168,6 @@ namespace OffRoadWorld.Data.Migrations
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
-
-                    b.Property<decimal>("Balance")
-                        .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -370,16 +368,6 @@ namespace OffRoadWorld.Data.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int")
                         .HasComment("Category Id of vehicle.");
-
-                    b.Property<int?>("EngineCapacity")
-                        .HasMaxLength(5500)
-                        .HasColumnType("int")
-                        .HasComment("Engine capacity measured in cubic centimeters.");
-
-                    b.Property<int>("HorsePower")
-                        .HasMaxLength(1000)
-                        .HasColumnType("int")
-                        .HasComment("Maximum horsepower a vehicle can have.");
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()

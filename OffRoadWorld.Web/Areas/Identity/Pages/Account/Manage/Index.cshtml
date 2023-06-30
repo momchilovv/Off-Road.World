@@ -1,0 +1,37 @@
+﻿@page
+@model IndexModel
+
+@{
+    ViewBag.Title = "Profile";
+    ViewBag.ActivePage = ManageNavPages.Index;
+}
+
+<h4>
+    Current balance: $@Model.ApplicationUser.Balance
+    <form method="get" class="input-group-sm" asp-controller="Marketplace" asp-action="AddFunds">
+        <input type="submit" value="Add Funds" class="fs-6 btn btn-success mb-3 p-2" />
+    </form>
+</h4>
+
+<partial name="_StatusMessage" for="StatusMessage" />
+<div class="row">
+    <div class="col-md-6">
+        <form id="profile-form" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-floating">
+                <input asp-for="Username" class="form-control" disabled />
+                <label asp-for="Username" class="form-label"></label>
+            </div>
+            <div class="form-floating">
+                <input asp-for="Input.PhoneNumber" class="form-control" />
+                <label asp-for="Input.PhoneNumber" class="form-label"></label>
+                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+            </div>
+            <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

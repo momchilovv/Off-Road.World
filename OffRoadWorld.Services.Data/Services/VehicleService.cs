@@ -16,22 +16,6 @@ namespace OffRoadWorld.Services.Data.Services
             this.dbContext = dbContext;
         }
 
-        public async Task<ICollection<VehicleViewModel>> GetAllVehiclesAsync()
-        {
-            return await dbContext.Vehicles
-                .Where(v => v.OwnerId == null)
-                .Select(v => new VehicleViewModel()
-                {
-                    Id = v.Id,
-                    Make = v.Make,
-                    Model = v.Model,
-                    ImageUrl = v.ImageUrl,
-                    ProductionYear = v.ProductionYear,
-                    Category = v.Category.Name
-                })
-                .ToListAsync();
-        }
-
         public async Task AddVehicleAsync(VehicleFormModel model)
         {
             var vehicle = new Vehicle()
@@ -40,6 +24,7 @@ namespace OffRoadWorld.Services.Data.Services
                 Make = model.Make,
                 Model = model.Model,
                 ProductionYear = model.ProductionYear,
+                Price = model.Price,
                 ImageUrl = model.ImageUrl,
                 CategoryId = model.CategoryId
             };
@@ -69,6 +54,9 @@ namespace OffRoadWorld.Services.Data.Services
                     Make = v.Make,
                     Model = v.Model,
                     ProductionYear = v.ProductionYear,
+                    HorsePower = v.HorsePower,
+                    EngineCapacity = v.EngineCapacity,
+                    Price = v.Price,
                     Category = v.Category.Name
                 })
                 .ToListAsync();

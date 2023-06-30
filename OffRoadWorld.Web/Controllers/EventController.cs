@@ -115,6 +115,8 @@ namespace OffRoadWorld.Web.Controllers
 
             var model = await eventService.GetJoinedEventsAsync(GetUserId());
 
+            var usersVehicles = await eventService.GetVehiclesAsync(GetUserId());
+
             if (model.Any(m => m.Id == id))
             {
                 TempData[WarningMessage] = "You are already participating in this event!";
@@ -127,7 +129,7 @@ namespace OffRoadWorld.Web.Controllers
                 return RedirectToAction(nameof(All));
             }
 
-            if (!user.Vehicles.Any(v => v.CategoryId == _event.CategoryId))
+            if (!usersVehicles.Any(v => v.CategoryId == _event.CategoryId))
             {
                 TempData[WarningMessage] = $"You need to own {_event.Category} vehicle to participate in {_event.Title}!";
                 return RedirectToAction(nameof(All));

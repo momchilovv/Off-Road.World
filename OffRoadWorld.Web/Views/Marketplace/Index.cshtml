@@ -1,0 +1,49 @@
+﻿@model ICollection<MarketplaceViewModel>
+@{
+    ViewBag.Title = "Marketplace";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="text-center row">
+    @if (Model.Any())
+    {
+        @foreach (var item in Model)
+        {
+            <div class="card col-4" style="width: 20rem; ">
+                <img class="card-img-top" style="width: 18rem;"
+                     src="@item.ImageUrl" alt="Vehicle Image">
+                <div class="card-body" style="width: 20rem;">
+
+                    <h5 class="card-title mt-1">@item.Make</h5>
+                    <p class="mb-0">Model: <b>@item.Model</b></p>
+                    <p class="mb-0">Production Year: <b>@item.ProductionYear</b></p>
+                    <p class="mb-0">Price: <b>$@item.Price.ToString("f2")</b></p>
+                    <p>Category: <b>@item.Category</b></p>
+                </div>
+                <a asp-controller="Vehicle" asp-action="Details" asp-route-id="@item.VehicleId" class="btn btn-primary mb-2 w-100 p-3 fw-bold">View Details</a>
+                @if (User.Identity!.Name == item.Seller)
+                {
+                    <a asp-controller="Marketplace" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Edit</a>
+                }
+                else
+                {
+                    <a class="input-group-sm" asp-controller="Marketplace" asp-action="Buy" asp-route-id="@item.VehicleId">
+                        <input type="submit" value="Buy Vehicle" class="fs-6 btn btn-success mb-2 w-100 p-3 fw-bold" />
+                    </a>
+                }
+            </div>
+        }
+    }
+    else
+    {
+        <div class="text-center">
+            <p class="display-6">Marketplace has no listed items.</p>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

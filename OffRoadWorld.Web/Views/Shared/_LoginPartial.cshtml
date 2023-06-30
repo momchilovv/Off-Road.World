@@ -1,16 +1,14 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using OffRoadWorld.Data.Models;
+@using System.Text.RegularExpressions;
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-controller="Event" asp-action="MyEvents">My Events</a>
-        </li>
     <li class="nav-item">
-        <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@Regex.Match(@User.Identity!.Name!, @"([A-Za-z]*)").Groups.Values.First()</a>
     </li>
     <li class="nav-item">
         <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">

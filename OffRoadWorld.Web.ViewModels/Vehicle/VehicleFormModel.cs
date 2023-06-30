@@ -25,6 +25,17 @@ namespace OffRoadWorld.Web.ViewModels.Vehicle
         public int ProductionYear { get; set; }
 
         [Required]
+        [Range(MinHorsePower, MaxHorsePower)]
+        public int HorsePower { get; set; }
+
+        [Range(MinEngineCapacity, MaxEngineCapacity)]
+        public int? EngineCapacity { get; set; }
+
+        [Required]
+        [Range(1.00, double.MaxValue)]
+        public decimal Price { get; set; }
+
+        [Required]
         public int CategoryId { get; set; }
 
         public ICollection<CategoryModel> Categories { get; set; } = new List<CategoryModel>();

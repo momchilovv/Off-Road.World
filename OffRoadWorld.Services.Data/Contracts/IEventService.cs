@@ -1,4 +1,5 @@
-﻿using OffRoadWorld.Web.ViewModels.Category;
+﻿using OffRoadWorld.Data.Models;
+using OffRoadWorld.Web.ViewModels.Category;
 using OffRoadWorld.Web.ViewModels.Event;
 
 namespace OffRoadWorld.Services.Data.Contracts
@@ -26,5 +27,7 @@ namespace OffRoadWorld.Services.Data.Contracts
         Task EditEventAsync(int id, EventFormModel model);
 
         Task<ICollection<EventDetailsViewModel>> GetMyEventsAsync(string userId);
+
+        Task<ICollection<Vehicle>> GetVehiclesAsync(string userId); 
     }
 }
