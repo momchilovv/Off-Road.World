@@ -8,15 +8,14 @@
 
 <form method="get" action="/Marketplace">
     <div class="input-group">
-        <input type="text" class="form-control" name="search" value="@ViewBag.SearchQuery" placeholder="Search Make, Model or Category">
+        <input type="text" class="form-control" name="search" value="@ViewBag.SearchQuery" placeholder="Search for Make, Model or Category">
         <div class="input-group-append">
             <button class="btn btn-primary" type="submit">Search</button>
         </div>
     </div>
 </form>
 <br />
-<!--TODO: ADD SORT AND FILTER-->
-
+<!--TODO: ADD SORT, FILTER AND PAGINATION-->
 <div class="text-center row">
     @if (Model.Any())
     {
@@ -46,6 +45,22 @@
                 }
             </div>
         }
+        <div class="pagination">
+            @if (ViewBag.CurrentPage > 1)
+            {
+                <a href="?page=@(ViewBag.CurrentPage - 1)" class="previous">Previous</a>
+            }
+
+            @for (int i = 1; i <= ViewBag.TotalPages; i++)
+            {
+                <a href="?page=@i" class="@(i == ViewBag.CurrentPage ? "active" : "")">@i</a>
+            }
+
+            @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+            {
+                <a href="?page=@(ViewBag.CurrentPage + 1)" class="next">Next</a>
+            }
+        </div>
     }
     else
     {

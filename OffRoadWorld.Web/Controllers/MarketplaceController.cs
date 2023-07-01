@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OffRoadWorld.Services.Data.Contracts;
+using OffRoadWorld.Web.ViewModels.Marketplace;
 using OffRoadWorld.Web.ViewModels.Vehicle;
 using System.Security.Claims;
 using static OffRoadWorld.Common.NotificationMessages;
@@ -10,6 +11,19 @@ namespace OffRoadWorld.Web.Controllers
     {
         private readonly IMarketplaceService marketplaceService;
 
+        private async Task<ICollection<MarketplaceViewModel>> GetItemsForPage(int page, int itemsPerPage)
+        {
+            var allListings = await marketplaceService.GetAllListingsAsync();
+
+            int startIndex = (page - 1) * itemsPerPage;
+            var listings = allListings
+                .Skip(startIndex)
+                .Take(itemsPerPage)
+                .ToList();
+
+            return listings;
+        }
+
         private string GetUserId() => User.FindFirstValue(ClaimTypes.NameIdentifier);
 
         public MarketplaceController(IMarketplaceService marketplaceService)
@@ -17,7 +31,7 @@ namespace OffRoadWorld.Web.Controllers
             this.marketplaceService = marketplaceService;
         }
 
-        public async Task<IActionResult> Index(string search)
+        public async Task<IActionResult> Index(string search, int page = 1, int pageSize = 8)
         {
             if (!string.IsNullOrEmpty(search))
             {
@@ -29,31 +43,47 @@ namespace OffRoadWorld.Web.Controllers
             }
             else
             {
-                var model = await marketplaceService.GetAllListingsAsync();
+                var vehicles = await marketplaceService.GetAllListingsAsync();
+
+                int listings = vehicles.Count();
+
+                var model = await GetItemsForPage(page, pageSize);
+
+                ViewBag.CurrentPage = page;
+                ViewBag.TotalPages = (int)Math.Ceiling((double)listings / pageSize);
+
                 return View(model);
             }
         }
 
         public async Task<IActionResult> Buy(Guid id)
         {
-            var vehicle = await marketplaceService.GetVehicleByIdAsync(id);
-
-            if (vehicle == null)
+            try
             {
-                TempData[ErrorMessage] = "The vehicle you are trying to buy does not exist!";
+                var vehicle = await marketplaceService.GetVehicleByIdAsync(id);
+
+                if (vehicle == null)
+                {
+                    TempData[ErrorMessage] = "The vehicle you are trying to buy does not exist!";
+                    return RedirectToAction(nameof(Index));
+                }
+
+                if (vehicle.OwnerId == GetUserId())
+                {
+                    TempData[WarningMessage] = "You already own this vehicle!";
+                    return RedirectToAction("MyVehicles", "Vehicle");
+                }
+
+                await marketplaceService.BuyVehicleAsync(GetUserId(), id);
+
+                TempData[SuccessMessage] = $"Successfully bought {vehicle.Make} {vehicle.Model} for ${vehicle.Price}.";
                 return RedirectToAction(nameof(Index));
             }
-
-            if (vehicle.OwnerId == GetUserId())
+            catch (ArgumentException)
             {
-                TempData[WarningMessage] = "You already own this vehicle!";
-                return RedirectToAction("MyVehicles", "Vehicle");
+                TempData[WarningMessage] = "You don't have enough money to buy this vehicle!";
+                return RedirectToAction(nameof(Index));
             }
-
-            await marketplaceService.BuyVehicleAsync(GetUserId(), id);
-
-            TempData[SuccessMessage] = $"Successfully bought {vehicle.Make} {vehicle.Model} for ${vehicle.Price}.";
-            return RedirectToAction(nameof(Index));
         }
 
         [HttpGet]

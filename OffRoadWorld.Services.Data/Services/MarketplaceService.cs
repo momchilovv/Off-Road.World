@@ -62,6 +62,10 @@ namespace OffRoadWorld.Services.Data.Services
 
                 dbContext.Marketplace.Remove(listing!);
             }
+            else
+            {
+                throw new ArgumentException("Insufficient amount for purchase.");
+            }
 
             await dbContext.SaveChangesAsync();
         }

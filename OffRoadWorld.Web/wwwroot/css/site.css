@@ -17,6 +17,36 @@ body {
     margin-bottom: 60px;
 }
 
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination a {
+    color: #333333;
+    text-decoration: none;
+    padding: 8px 12px;
+    margin: 0 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.pagination a.active {
+    background-color: #0d6efd;
+    color: #fff;
+}
+
+.pagination a.previous,
+.pagination a.next {
+    background-color: #f4f4f4;
+}
+
+.pagination a.disabled {
+    pointer-events: none;
+    color: #ccc;
+}
+
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
@@ -27,12 +57,12 @@ input[type="number"] {
     -moz-appearance: textfield; /* Firefox */
 }
 
-    input[type="number"]::-webkit-outer-spin-button,
-    input[type="number"]::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 
-        input[type="number"]::-webkit-inner-spin-button:after {
-            content: "";
-        }
+input[type="number"]::-webkit-inner-spin-button:after {
+    content: "";
+}
