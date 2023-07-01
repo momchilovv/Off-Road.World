@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OffRoadWorld.Data;
+using OffRoadWorld.Data.Models;
 using OffRoadWorld.Services.Data.Contracts;
 using OffRoadWorld.Web.ViewModels.Marketplace;
 using OffRoadWorld.Web.ViewModels.Vehicle;
@@ -24,6 +25,12 @@ namespace OffRoadWorld.Services.Data.Services
                     Id = v.Id,
                     Category = v.Category.Name,
                     Price = v.Price,
+                    EngineCapacity = v.EngineCapacity,
+                    ImageUrl = v.ImageUrl,
+                    Make = v.Make,
+                    Model = v.Model,
+                    HorsePower = v.HorsePower,
+                    ProductionYear = v.ProductionYear,
                     OwnerId = v.OwnerId
                 })
                 .FirstAsync();
@@ -74,6 +81,28 @@ namespace OffRoadWorld.Services.Data.Services
                     Seller = m.Seller!.UserName
                 })
                 .ToListAsync();
+        }
+
+        public async Task AddListingAsync(Guid id, VehicleViewModel model)
+        {
+            if (!await dbContext.Marketplace.AnyAsync(x => x.VehicleId == id))
+            {
+                var vehicle = await dbContext.Vehicles.FindAsync(id);
+
+                vehicle!.Price = model.Price;
+
+                vehicle.ImageUrl = model.ImageUrl;
+
+                await dbContext.Marketplace.AddAsync(new Marketplace()
+                {
+                    Id = new Guid(),
+                    VehicleId = vehicle.Id,
+                    CategoryId = vehicle.CategoryId,
+                    SellerId = vehicle.OwnerId
+                });
+
+                await dbContext.SaveChangesAsync();
+            }
         }
     }
 }

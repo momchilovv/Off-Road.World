@@ -100,6 +100,7 @@ namespace OffRoadWorld.Web.Controllers
         public async Task<IActionResult> Delete(EventDetailsViewModel model)
         {
             var _event = eventService.GetDetailsById(model.Id);
+
             await eventService.DeleteEventAsync(model.Id);
 
             TempData[SuccessMessage] = $"You have successfully deleted {_event.Title} event!";
@@ -115,7 +116,7 @@ namespace OffRoadWorld.Web.Controllers
 
             var model = await eventService.GetJoinedEventsAsync(GetUserId());
 
-            var usersVehicles = await eventService.GetVehiclesAsync(GetUserId());
+            var usersVehicle = await eventService.GetVehicleAsync(GetUserId(), _event.CategoryId);
 
             if (model.Any(m => m.Id == id))
             {
@@ -129,7 +130,7 @@ namespace OffRoadWorld.Web.Controllers
                 return RedirectToAction(nameof(All));
             }
 
-            if (!usersVehicles.Any(v => v.CategoryId == _event.CategoryId))
+            if (usersVehicle == null)
             {
                 TempData[WarningMessage] = $"You need to own {_event.Category} vehicle to participate in {_event.Title}!";
                 return RedirectToAction(nameof(All));

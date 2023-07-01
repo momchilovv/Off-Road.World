@@ -4,6 +4,7 @@ using OffRoadWorld.Data.Models;
 using OffRoadWorld.Services.Data.Contracts;
 using OffRoadWorld.Web.ViewModels.Category;
 using OffRoadWorld.Web.ViewModels.Event;
+using OffRoadWorld.Web.ViewModels.Vehicle;
 using Event = OffRoadWorld.Data.Models.Event;
 
 namespace OffRoadWorld.Services.Data.Services
@@ -91,6 +92,7 @@ namespace OffRoadWorld.Services.Data.Services
                     Location = $"{e.City}, {e.Country}",
                     Address = e.Address,
                     Category = e.Category.Name,
+                    CategoryId = e.CategoryId,
                     Owner = e.Owner.UserName,
                     TotalParticipants = e.Participants.Count()
                 })
@@ -170,11 +172,14 @@ namespace OffRoadWorld.Services.Data.Services
             }
         }
 
-        public async Task<ICollection<Vehicle>> GetVehiclesAsync(string userId)
+        public async Task<Vehicle> GetVehicleAsync(string userId, int categoryId)
         {
+#pragma warning disable CS8603 
+// Possible null reference return.
             return await dbContext.Vehicles
-                .Where(v => v.OwnerId == userId)
-                .ToListAsync();
+                .Where(v => v.OwnerId == userId && v.CategoryId == categoryId)
+                .FirstOrDefaultAsync();
+#pragma warning restore CS8603
         }
 
         public async Task<ICollection<EventViewModel>> GetJoinedEventsAsync(string userId)

@@ -25,7 +25,7 @@
                 <a asp-controller="Vehicle" asp-action="Details" asp-route-id="@item.VehicleId" class="btn btn-primary mb-2 w-100 p-3 fw-bold">View Details</a>
                 @if (User.Identity!.Name == item.Seller)
                 {
-                    <a asp-controller="Marketplace" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Edit</a>
+                    <a asp-controller="Marketplace" asp-action="Sell" asp-route-id="@item.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Edit</a>
                 }
                 else
                 {
