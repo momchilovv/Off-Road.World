@@ -11,6 +11,8 @@ namespace OffRoadWorld.Services.Data.Contracts
 
         Task<VehicleViewModel> GetVehicleByIdAsync(Guid vehicleId);
 
+        Task<ICollection<MarketplaceViewModel>> GetAllListingsBySearchAsync(string search);
+
         Task AddListingAsync(Guid id, VehicleViewModel model);
     }
 }

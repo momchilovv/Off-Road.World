@@ -30,6 +30,16 @@
                 <span asp-validation-for="@Model.ProductionYear" class="text-danger"></span>
             </div>
             <div class="mb-3">
+                <label asp-for="@Model.HorsePower" class="form-label">Horsepower</label>
+                <input asp-for="@Model.HorsePower" class="form-control" value="" />
+                <span asp-validation-for="@Model.HorsePower" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.EngineCapacity" class="form-label">Engine Capacity</label>
+                <input asp-for="@Model.EngineCapacity" class="form-control" value="" />
+                <span asp-validation-for="@Model.EngineCapacity" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
                 <label asp-for="@Model.Price" class="form-label">Price</label>
                 <input asp-for="@Model.Price" class="form-control" value="" />
                 <span asp-validation-for="@Model.Price" class="text-danger"></span>

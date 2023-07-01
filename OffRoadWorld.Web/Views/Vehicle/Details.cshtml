@@ -1,0 +1,53 @@
+﻿@model VehicleViewModel
+
+@{
+    ViewBag.Title = "Vehicle Details";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="container" style="display:inline">
+    <div class="row">
+        <div class="col-4">
+            <img class="card-img-top" style="width: 20rem;"
+                 src="@Model.ImageUrl" alt="House Image">
+        </div>
+        <div class="card col-8 border-0">
+            <p style="font-size:25px;"><u>@Model.Make</u></p>
+            <p>Model: <b>@Model.Model</b></p>
+            <p>
+                Price:
+                <b>$@($"{Model.Price:f2}")</b>
+            </p>
+            <p>Production Year: <b>@Model.ProductionYear</b></p>
+            <p>Category: <b>@Model.Category</b></p>  
+            <p></p>
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Engine Info</h5>
+                    <p class="card-text">Horsepower:  @Model.HorsePower</p>
+                    @if (Model.EngineCapacity != null)
+                    {
+                        <p class="card-text">Engine Capacity: @Model.EngineCapacity<a/>cc</p>
+                    }
+                </div>
+            </div>
+            <br />
+            <div class="form-inline">
+                @if (User.Identity!.Name == Model.Owner)
+                {
+                    <a class="btn btn-warning" asp-controller="Marketplace" asp-action="Sell"
+                       asp-route-id="@Model.Id">Edit</a>
+                    <a class="ml-2 btn btn-danger" asp-controller="Marketplace" asp-action="Delete"
+                       asp-route-id="@Model.Id">Delete</a>
+                }
+                else
+                {
+                    <a class="btn btn-success" asp-controller="Marketplace" asp-action="Buy"
+                       asp-route-id="@Model.Id">Buy Vehicle</a>
+                }
+            </div>
+        </div>
+    </div>
+</div>

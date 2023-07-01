@@ -31,7 +31,8 @@ namespace OffRoadWorld.Services.Data.Services
                     Model = v.Model,
                     HorsePower = v.HorsePower,
                     ProductionYear = v.ProductionYear,
-                    OwnerId = v.OwnerId
+                    OwnerId = v.OwnerId,
+                    Owner = v.Owner!.UserName
                 })
                 .FirstAsync();
         }
@@ -44,7 +45,7 @@ namespace OffRoadWorld.Services.Data.Services
 
             var listing = await dbContext.Marketplace
                 .Where(v => v.VehicleId == vehicleId)
-                .FirstAsync();
+                .FirstOrDefaultAsync();
 
             if (user?.Balance >= vehicle?.Price)
             {
@@ -59,7 +60,7 @@ namespace OffRoadWorld.Services.Data.Services
 
                 vehicle.OwnerId = userId;
 
-                dbContext.Marketplace.Remove(listing);
+                dbContext.Marketplace.Remove(listing!);
             }
 
             await dbContext.SaveChangesAsync();
@@ -103,6 +104,25 @@ namespace OffRoadWorld.Services.Data.Services
 
                 await dbContext.SaveChangesAsync();
             }
+        }
+
+        public async Task<ICollection<MarketplaceViewModel>> GetAllListingsBySearchAsync(string search)
+        {
+            return await dbContext.Marketplace
+                .Where(v => v.Vehicle.Make.Contains(search) || v.Vehicle.Model.Contains(search) || v.Category.Name.Contains(search))
+                .Select(m => new MarketplaceViewModel
+                {
+                    Id = m.Id,
+                    VehicleId = m.VehicleId,
+                    Make = m.Vehicle.Make,
+                    Model = m.Vehicle.Model,
+                    ProductionYear = m.Vehicle.ProductionYear,
+                    Category = m.Category.Name,
+                    Price = m.Vehicle.Price,
+                    ImageUrl = m.Vehicle.ImageUrl,
+                    Seller = m.Seller!.UserName
+                })
+                .ToListAsync();
         }
     }
 }

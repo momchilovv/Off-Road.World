@@ -27,7 +27,7 @@ namespace OffRoadWorld.Common
             public const int MakeMinLength = 2;
             public const int MakeMaxLength = 20;
 
-            public const int ModelMinLength = 4;
+            public const int ModelMinLength = 3;
             public const int ModelMaxLength = 10;
 
             public const int MinProductionYear = 1970;

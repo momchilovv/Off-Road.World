@@ -1,6 +1,7 @@
 ﻿#nullable disable
 
 using OffRoadWorld.Web.ViewModels.Category;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using static OffRoadWorld.Common.DataValidations.Vehicle;
 
@@ -18,10 +19,12 @@ namespace OffRoadWorld.Web.ViewModels.Vehicle
 
         [Required]
         [MaxLength(UrlMaxLength)]
+        [DisplayName("Image URL")]
         public string ImageUrl { get; set; }
 
         [Required]
         [Range(MinProductionYear, MaxProductionYear)]
+        [DisplayName("Production Year")]
         public int ProductionYear { get; set; }
 
         [Required]
@@ -29,6 +32,7 @@ namespace OffRoadWorld.Web.ViewModels.Vehicle
         public int HorsePower { get; set; }
 
         [Range(MinEngineCapacity, MaxEngineCapacity)]
+        [DisplayName("Engine Capacity")]
         public int? EngineCapacity { get; set; }
 
         [Required]
@@ -37,6 +41,8 @@ namespace OffRoadWorld.Web.ViewModels.Vehicle
 
         [Required]
         public int CategoryId { get; set; }
+
+        public string OwnerId { get; set; }
 
         public ICollection<CategoryModel> Categories { get; set; } = new List<CategoryModel>();
     }

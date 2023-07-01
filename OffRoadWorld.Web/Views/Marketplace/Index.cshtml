@@ -6,6 +6,17 @@
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
 
+<form method="get" action="/Marketplace">
+    <div class="input-group">
+        <input type="text" class="form-control" name="search" value="@ViewBag.SearchQuery" placeholder="Search Make, Model or Category">
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </div>
+    </div>
+</form>
+<br />
+<!--TODO: ADD SORT AND FILTER-->
+
 <div class="text-center row">
     @if (Model.Any())
     {
@@ -25,7 +36,7 @@
                 <a asp-controller="Vehicle" asp-action="Details" asp-route-id="@item.VehicleId" class="btn btn-primary mb-2 w-100 p-3 fw-bold">View Details</a>
                 @if (User.Identity!.Name == item.Seller)
                 {
-                    <a asp-controller="Marketplace" asp-action="Sell" asp-route-id="@item.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Edit</a>
+                    <a asp-controller="Marketplace" asp-action="Sell" asp-route-id="@item.VehicleId" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Edit</a>
                 }
                 else
                 {
@@ -38,9 +49,18 @@
     }
     else
     {
-        <div class="text-center">
-            <p class="display-6">Marketplace has no listed items.</p>
-        </div>
+        if (!string.IsNullOrEmpty(ViewBag.SearchQuery))
+        {
+            <div class="text-center">
+                <p class="display-7">No results found for "@ViewBag.SearchQuery".</p>
+            </div>
+        }
+        else
+        {
+            <div class="text-center">
+                <p class="display-6">Marketplace has no listed items.</p>
+            </div>
+        }
     }
 </div>
 

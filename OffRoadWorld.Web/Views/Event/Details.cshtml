@@ -6,10 +6,9 @@
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
 
-<div class="row">
-    <div class="card w-100">
+<div class="row" style="display: flex; justify-content: center; align-items: center;">
+    <div class="card w-50">
         <div class="card-body">
-            <h3 class="card-title text-center">@Model.Title</h3>
             <p class="mb-0"><span class="fw-bold">Description: </span>@Model.Description</p>
             <p class="mb-0"><span class="fw-bold">Starts at: </span>@Model.Start.ToString("dd-MM-yyyy HH:mm")</p>
             <p class="mb-0"><span class="fw-bold">Owner: </span>@Model.Owner</p>

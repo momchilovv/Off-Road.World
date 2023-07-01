@@ -26,7 +26,10 @@ namespace OffRoadWorld.Services.Data.Services
                 ProductionYear = model.ProductionYear,
                 Price = model.Price,
                 ImageUrl = model.ImageUrl,
-                CategoryId = model.CategoryId
+                CategoryId = model.CategoryId,
+                HorsePower = model.HorsePower,
+                EngineCapacity = model.EngineCapacity,
+                OwnerId = model.OwnerId
             };
 
             await dbContext.Vehicles.AddAsync(vehicle);
