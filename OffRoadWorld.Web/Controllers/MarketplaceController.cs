@@ -56,6 +56,13 @@ namespace OffRoadWorld.Web.Controllers
             }
         }
 
+        public async Task<IActionResult> Details(Guid id)
+        {
+            var model = await marketplaceService.GetVehicleByIdAsync(id);
+
+            return View(model);
+        }
+
         public async Task<IActionResult> Buy(Guid id)
         {
             try
@@ -127,6 +134,38 @@ namespace OffRoadWorld.Web.Controllers
             await marketplaceService.AddListingAsync(id, vehicle);
 
             TempData[SuccessMessage] = $"{listing.Make} {listing.Model} was successfully added for selling in Marketplace for ${listing.Price}.";
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Remove(Guid id)
+        {
+            var model = await marketplaceService.GetVehicleByIdAsync(id);
+
+            if (model.OwnerId != GetUserId())
+            {
+                TempData[ErrorMessage] = "You are not the owner of this vehicle.";
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Remove(Guid id, VehicleViewModel vehicle)
+        {
+            var model = await marketplaceService.GetVehicleByIdAsync(id);
+
+            if (model.OwnerId != GetUserId())
+            {
+                TempData[ErrorMessage] = "You are not the owner of this vehicle.";
+                return RedirectToAction(nameof(Index));
+            }
+
+            TempData[SuccessMessage] = $"You have successfully removed your {model.Make} from the Marketplace!";
+            await marketplaceService.RemoveListingAsync(id);
+
             return RedirectToAction(nameof(Index));
         }
     }

@@ -21,7 +21,7 @@
                 <b>$@($"{Model.Price:f2}")</b>
             </p>
             <p>Production Year: <b>@Model.ProductionYear</b></p>
-            <p>Category: <b>@Model.Category</b></p>  
+            <p>Category: <b>@Model.Category</b></p>
             <p></p>
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
@@ -29,7 +29,7 @@
                     <p class="card-text">Horsepower:  @Model.HorsePower</p>
                     @if (Model.EngineCapacity != null)
                     {
-                        <p class="card-text">Engine Capacity: @Model.EngineCapacity<a/>cc</p>
+                        <p class="card-text">Engine Capacity: @Model.EngineCapacity<a />cc</p>
                     }
                 </div>
             </div>
@@ -39,8 +39,8 @@
                 {
                     <a class="btn btn-warning" asp-controller="Marketplace" asp-action="Sell"
                        asp-route-id="@Model.Id">Edit</a>
-                    <a class="ml-2 btn btn-danger" asp-controller="Marketplace" asp-action="Delete"
-                       asp-route-id="@Model.Id">Delete</a>
+                    <a class="ml-2 btn btn-danger" asp-controller="Marketplace" asp-action="Remove"
+                       asp-route-id="@Model.Id">Remove</a>
                 }
                 else
                 {

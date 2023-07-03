@@ -10,21 +10,12 @@ namespace OffRoadWorld.Web.Controllers
     public class VehicleController : BaseController
     {
         private readonly IVehicleService vehicleService;
-        private readonly IMarketplaceService marketplaceService;
 
         private string GetUserId() => User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-        public VehicleController(IVehicleService vehicleService, IMarketplaceService marketplaceService)
+        public VehicleController(IVehicleService vehicleService)
         {
             this.vehicleService = vehicleService;
-            this.marketplaceService = marketplaceService;
-        }
-
-        public async Task<IActionResult> Details(Guid id)
-        {
-            var model = await marketplaceService.GetVehicleByIdAsync(id);
-
-            return View(model);
         }
 
         [HttpGet]

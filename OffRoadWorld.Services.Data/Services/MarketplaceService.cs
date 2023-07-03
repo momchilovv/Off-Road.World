@@ -128,5 +128,16 @@ namespace OffRoadWorld.Services.Data.Services
                 })
                 .ToListAsync();
         }
+
+        public async Task RemoveListingAsync(Guid id)
+        {
+            var listing = await dbContext.Marketplace
+                .Where(v => v.VehicleId == id)
+                .FirstAsync();
+
+            dbContext.Marketplace.Remove(listing);
+
+            await dbContext.SaveChangesAsync();
+        }
     }
 }
