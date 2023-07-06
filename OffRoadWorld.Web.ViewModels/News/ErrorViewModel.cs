@@ -1,4 +1,4 @@
-namespace OffRoadWorld.Web.ViewModels.Home
+namespace OffRoadWorld.Web.ViewModels.News
 {
     public class ErrorViewModel
     {
