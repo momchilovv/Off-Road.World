@@ -1,9 +1,12 @@
-﻿@model List<NewsViewModel>
+﻿@inject IViewLocalizer Localizer
+
+@model List<NewsViewModel>
+
 @{
-    ViewBag.Title = "News";
+    ViewBag.Title = Localizer["News"];
 }
 
-<h2 style="text-align: center;">Off-Road Related News</h2>
+<h2 style="text-align: center;">Off-Road @Localizer["News"]</h2>
 
 @if (Model.Any())
 {
@@ -13,10 +16,10 @@
             <div class="card-body">
                 <h4 class="card-title">@article.Title</h4>
                 <p class="card-text">@article.Description</p>
-                <a href="@article.Url" class="btn btn-primary" target="_blank">Read More</a>
+                <a href="@article.Url" class="btn btn-primary" target="_blank">@Localizer["Read more"]</a>
             </div>
             <div class="card-footer">
-                <small class="text-muted">Published at @article.PublishedAt!.Value.ToString("dd-MMMM-yyyy")</small>
+                <small class="text-muted">@Localizer["Published at"] @article.PublishedAt!.Value.ToString("dd MMMM yyyy")</small>
             </div>
         </div>
     }
@@ -24,14 +27,6 @@
 else
 {
     <div class="text-center">
-        <p class="display-6">There are no news to display.</p>
+        <p class="display-6">@Localizer["There are no news to display."]</p>
     </div>
 }
-
-@*
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>To the website where you can find everything about the Off-Road World!</p>
-    <p>Discussions, Events, Marketplace, News and more!</p>
-</div>*@

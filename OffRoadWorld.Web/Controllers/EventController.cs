@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 using OffRoadWorld.Data.Models;
 using OffRoadWorld.Services.Data.Contracts;
 using OffRoadWorld.Web.ViewModels.Event;
@@ -12,13 +13,16 @@ namespace OffRoadWorld.Web.Controllers
     {
         private readonly IEventService eventService;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IStringLocalizer<EventController> localizer;
 
         private string GetUserId() => User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-        public EventController(IEventService eventService, UserManager<ApplicationUser> userManager)
+        public EventController(IEventService eventService, UserManager<ApplicationUser> userManager,
+            IStringLocalizer<EventController> localizer)
         {
             this.eventService = eventService;
             this.userManager = userManager;
+            this.localizer = localizer;
         }
 
         public async Task<IActionResult> All()
@@ -59,7 +63,7 @@ namespace OffRoadWorld.Web.Controllers
 
             if (!GetUserId().Equals(model.OwnerId))
             {
-                TempData[ErrorMessage] = "You cannot edit this event because you are not the owner!";
+                TempData[ErrorMessage] = localizer["You cannot edit this event because you are not the owner!"].ToString();
                 return RedirectToAction(nameof(All));
             }
 
@@ -89,7 +93,7 @@ namespace OffRoadWorld.Web.Controllers
 
             if (!User.Identity!.Name!.Equals(model.Owner))
             {
-                TempData[ErrorMessage] = "You cannot delete this event because you are not the owner!";
+                TempData[ErrorMessage] = localizer["You cannot delete this event because you are not the owner!"].ToString();
                 return RedirectToAction(nameof(All));
             }
 
@@ -103,7 +107,7 @@ namespace OffRoadWorld.Web.Controllers
 
             await eventService.DeleteEventAsync(model.Id);
 
-            TempData[SuccessMessage] = $"You have successfully deleted {_event.Title} event!";
+            TempData[SuccessMessage] = localizer["You have successfully deleted {0} event!", _event.Title].ToString();
 
             return RedirectToAction(nameof(All));
         }
@@ -120,24 +124,24 @@ namespace OffRoadWorld.Web.Controllers
 
             if (model.Any(m => m.Id == id))
             {
-                TempData[WarningMessage] = "You are already participating in this event!";
+                TempData[WarningMessage] = localizer["You are already participating in this event!"].ToString();
                 return RedirectToAction(nameof(All));
             }
 
             if (_event.Owner == User.Identity!.Name)
             {
-                TempData[WarningMessage] = "You cannot participate in this event because you are the owner!";
+                TempData[WarningMessage] = localizer["You cannot participate in this event because you are the owner!"].ToString();
                 return RedirectToAction(nameof(All));
             }
 
             if (usersVehicle == null)
             {
-                TempData[WarningMessage] = $"You need to own {_event.Category} vehicle to participate in {_event.Title}!";
+                TempData[WarningMessage] = localizer["You need to own {0} vehicle to participate in {1}!", _event.Category, _event.Title].ToString();
                 return RedirectToAction(nameof(All));
             }
 
             await eventService.JoinEventAsync(GetUserId(), _event);
-            TempData[SuccessMessage] = $"You have successfully joined the {_event.Title} event!";
+            TempData[SuccessMessage] = localizer["You have successfully joined the {0} event!", _event.Title].ToString();
 
             return RedirectToAction(nameof(All));
         }
@@ -155,7 +159,7 @@ namespace OffRoadWorld.Web.Controllers
 
             await eventService.LeaveEventAsync(GetUserId(), _event);
 
-            TempData[SuccessMessage] = $"You have left {_event.Title} event!";
+            TempData[SuccessMessage] = localizer["You have left {0} event!", _event.Title].ToString();
 
             return RedirectToAction(nameof(Joined));
         }

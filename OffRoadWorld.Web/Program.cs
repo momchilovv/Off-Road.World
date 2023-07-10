@@ -1,4 +1,6 @@
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using OffRoadWorld.Data;
 using OffRoadWorld.Data.Models;
 using OffRoadWorld.Services.Data.Contracts;
@@ -29,7 +31,26 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+builder.Services.AddMvc()
+    .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+    .AddDataAnnotationsLocalization();
+
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    var supportedCultures = new[] { "en-US", "bg" };
+
+    options.SetDefaultCulture("en-US")
+        .AddSupportedCultures(supportedCultures)
+        .AddSupportedUICultures(supportedCultures);
+});
+
 var app = builder.Build();
+
+var localizationOptions = app.Services.GetService<IOptions<RequestLocalizationOptions>>();
+app.UseRequestLocalization(localizationOptions!.Value);
+
 
 if (app.Environment.IsDevelopment())
 {

@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@inject IViewLocalizer Localizer
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -24,31 +26,31 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="News" asp-action="Index">News</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="News" asp-action="Index">@Localizer["News"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Event" asp-action="All">Events</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Event" asp-action="All">@Localizer["Events"]</a>
                         </li>
                         <!--
                             START OF SECTION FOR TEMPORARY MENU
                         -->
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Event" asp-action="Add">Add Event</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Event" asp-action="Add">@Localizer["Add Event"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Event" asp-action="Joined">Joined Events</a>
-                        </li>                
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Event" asp-action="MyEvents">My Events</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Event" asp-action="Joined">@Localizer["Joined Events"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Vehicle" asp-action="Add">Add Vehicle</a>
+                            <a class="nav-link text-dark" asp-controller="Event" asp-action="MyEvents">@Localizer["My Events"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Vehicle" asp-action="MyVehicles">My Vehicles</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Vehicle" asp-action="Add">@Localizer["Add Vehicle"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Marketplace" asp-action="Index">Marketplace</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Vehicle" asp-action="MyVehicles">@Localizer["My Vehicles"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Marketplace" asp-action="Index">@Localizer["Marketplace"]</a>
                         </li>
                         <!--
                             END OF SECTION FOR TEMPORARY MENU
@@ -67,11 +69,16 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; Off-Road World - 2023 
-            @if (DateTime.UtcNow.Year > 2023)
-            {
-                @Html.Raw($"- {@DateTime.UtcNow.Year}");
-            }
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    &copy; Off-Road World - @DateTime.UtcNow.Year
+                </div>
+                <div>
+                    <div>
+                        <partial name="_SelectLanguagePartial" />
+                    </div></>
+                </div>
+            </div>
         </div>
     </footer>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
