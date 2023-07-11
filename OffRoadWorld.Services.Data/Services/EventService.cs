@@ -4,7 +4,6 @@ using OffRoadWorld.Data.Models;
 using OffRoadWorld.Services.Data.Contracts;
 using OffRoadWorld.Web.ViewModels.Category;
 using OffRoadWorld.Web.ViewModels.Event;
-using OffRoadWorld.Web.ViewModels.Vehicle;
 using Event = OffRoadWorld.Data.Models.Event;
 
 namespace OffRoadWorld.Services.Data.Services
@@ -21,6 +20,7 @@ namespace OffRoadWorld.Services.Data.Services
         public async Task<ICollection<EventViewModel>> GetAllEventsAsync()
         {
             return await dbContext.Events
+                .Where(e => e.Start >= DateTime.UtcNow)
                 .Select(e => new EventViewModel()
                 {
                     Id = e.Id,
