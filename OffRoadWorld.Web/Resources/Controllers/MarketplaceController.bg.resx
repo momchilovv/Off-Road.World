@@ -117,34 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Add" xml:space="preserve">
-    <value>Добави</value>
+  <data name="Successfully bought {0} {1} for ${2}." xml:space="preserve">
+    <value>Успешно купихте {0} {1} за ${2}.</value>
   </data>
-  <data name="Add New Event" xml:space="preserve">
-    <value>Добави Ново Събитие</value>
+  <data name="The vehicle you are trying to buy does not exist!" xml:space="preserve">
+    <value>Превозното средство, което се опитвате да купите не съществува!</value>
   </data>
-  <data name="Address" xml:space="preserve">
-    <value>Адрес</value>
+  <data name="The vehicle you are trying to sell does not exist!" xml:space="preserve">
+    <value>Превозното средство, което се опитвате да продадете не съществува!</value>
   </data>
-  <data name="Category of event" xml:space="preserve">
-    <value>Категория</value>
+  <data name="You already own this vehicle!" xml:space="preserve">
+    <value>Вече притежавате това превозно средство!</value>
   </data>
-  <data name="City" xml:space="preserve">
-    <value>Град</value>
+  <data name="You are not the owner of this vehicle." xml:space="preserve">
+    <value>Не сте собственик на това превозно средство.</value>
   </data>
-  <data name="Country" xml:space="preserve">
-    <value>Държава</value>
+  <data name="You don't have enough money to buy this vehicle!" xml:space="preserve">
+    <value>Нямате достатъчно средства за да купите това превозно средство!</value>
   </data>
-  <data name="Description" xml:space="preserve">
-    <value>Описание</value>
+  <data name="You have successfully removed your {0} {1} from the Marketplace!" xml:space="preserve">
+    <value>Успешно премахнахте обявата за {0} {1}.</value>
   </data>
-  <data name="Select a country" xml:space="preserve">
-    <value>Избери държава</value>
+  <data name="Your {0} {1} is already listed for sale." xml:space="preserve">
+    <value>Вече сте обявили за продажба {0} {1}.</value>
   </data>
-  <data name="Start" xml:space="preserve">
-    <value>Начало</value>
-  </data>
-  <data name="Title" xml:space="preserve">
-    <value>Име</value>
+  <data name="{0} {1} was successfully added for selling in Marketplace for ${2}." xml:space="preserve">
+    <value>{0} {1} беше успешно добавен за продажба за ${2}.</value>
   </data>
 </root>

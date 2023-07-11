@@ -1,6 +1,9 @@
-﻿@model List<VehicleViewModel>
+﻿@inject IViewLocalizer Localizer
+
+@model List<VehicleViewModel>
+
 @{
-    ViewBag.Title = "My Vehicles";
+    ViewBag.Title = Localizer["My Vehicles"];
 }
 
 <h2 class="text-center">@ViewBag.Title</h2>
@@ -14,19 +17,19 @@
             <div class="card col-4" style="width: 20rem; ">
                 <div class="card-body">
                     <h5 class="card-title mt-1">@vehicle.Make</h5>
-                    <p class="mb-0">Model: <b>@vehicle.Model</b></p>
-                    <p class="mb-0">Production Year: <b>@vehicle.ProductionYear</b></p>
-                    <p class="mb-0">Horse Power: <b>@vehicle.HorsePower</b></p>
+                    <p class="mb-0">@Localizer["Model:"] <b>@vehicle.Model</b></p>
+                    <p class="mb-0">@Localizer["Production Year:"] <b>@vehicle.ProductionYear</b></p>
+                    <p class="mb-0">@Localizer["Horsepower:"] <b>@vehicle.HorsePower</b></p>
                     @if (vehicle.EngineCapacity != null)
                     {
-                        <p class="mb-0">Engine Capacity: <b>@vehicle.EngineCapacity</b><b>cc</b></p>
+                        <p class="mb-0">@Localizer["Engine Capacity:"] <b>@vehicle.EngineCapacity</b><b>cc</b></p>
                     }
-                    <p class="mb-0">Price: <b>$@vehicle.Price</b></p>
-                    <p>Category: <b>@vehicle.Category</b></p>
+                    <p class="mb-0">@Localizer["Price:"] <b>$@vehicle.Price</b></p>
+                    <p>@Localizer["Category:"] <b>@vehicle.Category</b></p>
                 </div>
 
                 <form method="get" class="input-group-sm" asp-controller="Marketplace" asp-action="Sell" asp-route-id="@vehicle.Id">
-                    <input type="submit" value="Sell" class="fs-6 btn btn-danger w-100 mb-3 p-2" />
+                    <input type="submit" value="@Localizer["Sell"]" class="fs-6 btn btn-danger w-100 mb-3 p-2" />
                 </form>
             </div>
         }
@@ -34,8 +37,8 @@
     else
     {
         <div class="text-center">
-            <p class="display-6">You don't own any vehicles.</p>
-            <p class="display-7">You can buy one by visiting the <a href="/Marketplace/Index">Marketplace</a>.</p>
+            <p class="display-6">@Localizer["You don't own any vehicles."]</p>
+            <p class="display-7">@Localizer["You can buy one by visiting the"] <a href="/Marketplace/Index">@Localizer["Marketplace"]</a>.</p>
         </div>
     }
 </div>

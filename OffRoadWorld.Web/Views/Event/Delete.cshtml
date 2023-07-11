@@ -1,5 +1,7 @@
-﻿@{
-    ViewBag.Title = "Delete Event";
+﻿@inject IViewLocalizer Localizer
+
+@{
+    ViewBag.Title = Localizer["Delete Event"];
 }
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
@@ -10,12 +12,12 @@
                 <h3 class="card-title text-center">@Model.Title</h3>
                 <p class="card-text">
                     <span class="fw-bold">
-                        Description:
+                        @Localizer["Description:"]
                     </span>@Model.Description
                 </p>
             </div>
             <div class="mb-3 d-flex justify-content-center">
-                <input type="submit" value="Delete" class="btn btn-danger" />
+                <input type="submit" value="@Localizer["Delete"]" class="btn btn-danger" />
             </div>
         </div>
     </div>

@@ -1,7 +1,9 @@
-﻿@model VehicleViewModel
+﻿@inject IViewLocalizer Localizer
+
+@model VehicleViewModel
 
 @{
-    ViewBag.Title = "Vehicle Details";
+    ViewBag.Title = Localizer["Vehicle Details"];
 }
 
 <h2 class="text-center">@ViewBag.Title</h2>
@@ -15,21 +17,21 @@
         </div>
         <div class="card col-8 border-0">
             <p style="font-size:25px;"><u>@Model.Make</u></p>
-            <p>Model: <b>@Model.Model</b></p>
+            <p>@Localizer["Model:"] <b>@Model.Model</b></p>
             <p>
-                Price:
+                @Localizer["Price:"]
                 <b>$@($"{Model.Price:f2}")</b>
             </p>
-            <p>Production Year: <b>@Model.ProductionYear</b></p>
-            <p>Category: <b>@Model.Category</b></p>
+            <p>@Localizer["Production Year:"] <b>@Model.ProductionYear</b></p>
+            <p>@Localizer["Category:"] <b>@Model.Category</b></p>
             <p></p>
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
-                    <h5 class="card-title">Engine Info</h5>
-                    <p class="card-text">Horsepower:  @Model.HorsePower</p>
+                    <h5 class="card-title">@Localizer["Engine Info"]</h5>
+                    <p class="card-text">@Localizer["Horsepower:"]  @Model.HorsePower</p>
                     @if (Model.EngineCapacity != null)
                     {
-                        <p class="card-text">Engine Capacity: @Model.EngineCapacity<a />cc</p>
+                        <p class="card-text">@Localizer["Engine Capacity:"] @Model.EngineCapacity<a />cc</p>
                     }
                 </div>
             </div>
@@ -38,14 +40,14 @@
                 @if (User.Identity!.Name == Model.Owner)
                 {
                     <a class="btn btn-warning" asp-controller="Marketplace" asp-action="Sell"
-                       asp-route-id="@Model.Id">Edit</a>
+                       asp-route-id="@Model.Id">@Localizer["Edit"]</a>
                     <a class="ml-2 btn btn-danger" asp-controller="Marketplace" asp-action="Remove"
-                       asp-route-id="@Model.Id">Remove</a>
+                       asp-route-id="@Model.Id">@Localizer["Remove"]</a>
                 }
                 else
                 {
                     <a class="btn btn-success" asp-controller="Marketplace" asp-action="Buy"
-                       asp-route-id="@Model.Id">Buy Vehicle</a>
+                       asp-route-id="@Model.Id">@Localizer["Buy Vehicle"]</a>
                 }
             </div>
         </div>

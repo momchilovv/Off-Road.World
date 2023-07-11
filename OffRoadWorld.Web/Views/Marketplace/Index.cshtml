@@ -1,6 +1,9 @@
-﻿@model ICollection<MarketplaceViewModel>
+﻿@inject IViewLocalizer Localizer
+
+@model ICollection<MarketplaceViewModel>
+
 @{
-    ViewBag.Title = "Marketplace";
+    ViewBag.Title = Localizer["Marketplace"];
 }
 
 <h2 class="text-center">@ViewBag.Title</h2>
@@ -8,9 +11,9 @@
 
 <form method="get" action="/Marketplace">
     <div class="input-group">
-        <input type="text" class="form-control" name="search" value="@ViewBag.SearchQuery" placeholder="Search for Make, Model or Category">
+        <input type="text" class="form-control" name="search" value="@ViewBag.SearchQuery" placeholder="@Localizer["Search for Make, Model or Category"]">
         <div class="input-group-append">
-            <button class="btn btn-primary" type="submit">Search</button>
+            <button class="btn btn-primary" type="submit">@Localizer["Search"]</button>
         </div>
     </div>
 </form>
@@ -27,20 +30,20 @@
                 <div class="card-body" style="width: 20rem;">
 
                     <h5 class="card-title mt-1">@item.Make</h5>
-                    <p class="mb-0">Model: <b>@item.Model</b></p>
-                    <p class="mb-0">Production Year: <b>@item.ProductionYear</b></p>
-                    <p class="mb-0">Price: <b>$@item.Price.ToString("f2")</b></p>
+                    <p class="mb-0">@Localizer["Model:"] <b>@item.Model</b></p>
+                    <p class="mb-0">@Localizer["Production Year:"] <b>@item.ProductionYear</b></p>
+                    <p class="mb-0">@Localizer["Price:"] <b>$@item.Price.ToString("f2")</b></p>
                     <p>Category: <b>@item.Category</b></p>
                 </div>
-                <a asp-controller="Marketplace" asp-action="Details" asp-route-id="@item.VehicleId" class="btn btn-primary mb-2 w-100 p-3 fw-bold">View Details</a>
+                <a asp-controller="Marketplace" asp-action="Details" asp-route-id="@item.VehicleId" class="btn btn-primary mb-2 w-100 p-3 fw-bold">@Localizer["View Details"]</a>
                 @if (User.Identity!.Name == item.Seller)
                 {
-                    <a asp-controller="Marketplace" asp-action="Remove" asp-route-id="@item.VehicleId" class="btn btn-danger mb-2 w-100 p-3 fw-bold">Remove</a>
+                    <a asp-controller="Marketplace" asp-action="Remove" asp-route-id="@item.VehicleId" class="btn btn-danger mb-2 w-100 p-3 fw-bold">@Localizer["Remove"]</a>
                 }
                 else
                 {
                     <a class="input-group-sm" asp-controller="Marketplace" asp-action="Buy" asp-route-id="@item.VehicleId">
-                        <input type="submit" value="Buy Vehicle" class="fs-6 btn btn-success mb-2 w-100 p-3 fw-bold" />
+                        <input type="submit" value="@Localizer["Buy Vehicle"]" class="fs-6 btn btn-success mb-2 w-100 p-3 fw-bold" />
                     </a>
                 }
             </div>
@@ -48,7 +51,7 @@
         <div class="pagination">
             @if (ViewBag.CurrentPage > 1)
             {
-                <a href="?page=@(ViewBag.CurrentPage - 1)" class="previous">Previous</a>
+                <a href="?page=@(ViewBag.CurrentPage - 1)" class="previous">@Localizer["Previous"]</a>
             }
 
             @for (int i = 1; i <= ViewBag.TotalPages; i++)
@@ -58,7 +61,7 @@
 
             @if (ViewBag.CurrentPage < ViewBag.TotalPages)
             {
-                <a href="?page=@(ViewBag.CurrentPage + 1)" class="next">Next</a>
+                <a href="?page=@(ViewBag.CurrentPage + 1)" class="next">@Localizer["Next"]</a>
             }
         </div>
     }
@@ -67,13 +70,13 @@
         if (!string.IsNullOrEmpty(ViewBag.SearchQuery))
         {
             <div class="text-center">
-                <p class="display-7">No results found for "@ViewBag.SearchQuery".</p>
+                <p class="display-7">@Localizer["No results found for"] "@ViewBag.SearchQuery".</p>
             </div>
         }
         else
         {
             <div class="text-center">
-                <p class="display-6">Marketplace has no listed items.</p>
+                <p class="display-6">@Localizer["Marketplace has no listed items."]</p>
             </div>
         }
     }

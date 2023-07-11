@@ -1,6 +1,9 @@
-﻿@model List<EventDetailsViewModel>
+﻿@inject IViewLocalizer Localizer
+
+@model List<EventDetailsViewModel>
+
 @{
-    ViewBag.Title = "My Events";
+    ViewBag.Title = Localizer["My Events"];
 }
 
 <h2 class="text-center">@ViewBag.Title</h2>
@@ -15,14 +18,14 @@
                 <div class="card-body">
 
                     <h5 class="card-title mt-1">@_event.Title</h5>
-                    <p class="mb-0"><b>Start:</b> @_event.Start.ToString("dd-MM-yyyy HH:mm")</p>
-                    <p class="mb-0"><b>Location:</b> @_event.Location</p>
-                    <p class="mb-0"><b>Address:</b> @_event.Address</p>
+                    <p class="mb-0"><b>@Localizer["Start:"]</b> @_event.Start.ToString("dd-MM-yyyy HH:mm")</p>
+                    <p class="mb-0"><b>@Localizer["Location:"]</b> @_event.Location</p>
+                    <p class="mb-0"><b>@Localizer["Address:"]</b> @_event.Address</p>
                     <p><b>Category:</b> @_event.Category</p>
                 </div>
 
                 <form method="get" class="input-group-sm" asp-controller="Event" asp-action="Delete" asp-route-id="@_event.Id">
-                    <input type="submit" value="Delete" class="fs-6 btn btn-danger mb-3 p-2" />
+                    <input type="submit" value="@Localizer["Delete"]" class="fs-6 btn btn-danger mb-3 p-2" />
                 </form>
             </div>
         }
@@ -30,8 +33,8 @@
     else
     {
         <div class="text-center">
-            <p class ="display-6">You have no owned events.</p>
-            <p class="display-7">You can add one by clicking <a href="/Event/Add">here</a>.</p>
+            <p class ="display-6">@Localizer["You have no owned events."]</p>
+            <p class="display-7">@Localizer["You can add one by clicking"] <a href="/Event/Add">@Localizer["here"]</a>.</p>
         </div>
     }
 </div>

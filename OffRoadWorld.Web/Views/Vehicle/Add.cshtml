@@ -1,6 +1,9 @@
-﻿@model VehicleFormModel
+﻿@inject IViewLocalizer Localizer
+
+@model VehicleFormModel
+
 @{
-    ViewBag.Title = "Add Vehicle";
+    ViewBag.Title = Localizer["Add Vehicle"];
 }
 
 <h2 class="text-center">@ViewBag.Title</h2>
@@ -10,42 +13,42 @@
     <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
         <form asp-action="Add" method="post">
             <div class="mb-3">
-                <label asp-for="@Model.Make" class="form-label">Make</label>
+                <label asp-for="@Model.Make" class="form-label">@Localizer["Make"]</label>
                 <input asp-for="@Model.Make" class="form-control" aria-required="true" />
                 <span asp-validation-for="@Model.Make" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="@Model.Model" class="form-label">Model</label>
+                <label asp-for="@Model.Model" class="form-label">@Localizer["Model"]</label>
                 <input asp-for="@Model.Model" class="form-control" aria-required="true" />
                 <span asp-validation-for="@Model.Model" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="@Model.ImageUrl" class="form-label">Image URL</label>
+                <label asp-for="@Model.ImageUrl" class="form-label">@Localizer["Image URL"]</label>
                 <input asp-for="@Model.ImageUrl" class="form-control" aria-required="true" />
                 <span asp-validation-for="@Model.ImageUrl" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="@Model.ProductionYear" class="form-label">Production Year</label>
+                <label asp-for="@Model.ProductionYear" class="form-label">@Localizer["Production Year"]</label>
                 <input asp-for="@Model.ProductionYear" class="form-control" value="" />
                 <span asp-validation-for="@Model.ProductionYear" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="@Model.HorsePower" class="form-label">Horsepower</label>
+                <label asp-for="@Model.HorsePower" class="form-label">@Localizer["Production Year"]</label>
                 <input asp-for="@Model.HorsePower" class="form-control" value="" />
                 <span asp-validation-for="@Model.HorsePower" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="@Model.EngineCapacity" class="form-label">Engine Capacity</label>
+                <label asp-for="@Model.EngineCapacity" class="form-label">@Localizer["Engine Capacity"]</label>
                 <input asp-for="@Model.EngineCapacity" class="form-control" value="" />
                 <span asp-validation-for="@Model.EngineCapacity" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="@Model.Price" class="form-label">Price</label>
+                <label asp-for="@Model.Price" class="form-label">@Localizer["Price"]</label>
                 <input asp-for="@Model.Price" class="form-control" value="" />
                 <span asp-validation-for="@Model.Price" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="@Model.CategoryId" class="form-label">Category</label>
+                <label asp-for="@Model.CategoryId" class="form-label">@Localizer["Category"]</label>
                 <select asp-for="@Model.CategoryId" class="form-control">
                     @foreach (var category in @Model.Categories)
                     {
@@ -55,7 +58,7 @@
                 <span asp-validation-for="@Model.CategoryId" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <input class="btn btn-success" type="submit" value="Add" />
+                <input class="btn btn-success" type="submit" value="@Localizer["Add"]" />
             </div>
         </form>
     </div>

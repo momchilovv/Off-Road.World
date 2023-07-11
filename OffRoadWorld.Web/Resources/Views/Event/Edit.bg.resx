@@ -138,6 +138,9 @@
   <data name="Save" xml:space="preserve">
     <value>Запази</value>
   </data>
+  <data name="Select a country" xml:space="preserve">
+    <value>Избери държава</value>
+  </data>
   <data name="Start" xml:space="preserve">
     <value>Начало</value>
   </data>

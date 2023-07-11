@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 using OffRoadWorld.Services.Data.Contracts;
 using OffRoadWorld.Web.ViewModels.Marketplace;
 using OffRoadWorld.Web.ViewModels.Vehicle;
@@ -10,6 +11,7 @@ namespace OffRoadWorld.Web.Controllers
     public class MarketplaceController : BaseController
     {
         private readonly IMarketplaceService marketplaceService;
+        private readonly IStringLocalizer<MarketplaceController> localizer;
 
         private async Task<ICollection<MarketplaceViewModel>> GetItemsForPage(int page, int itemsPerPage)
         {
@@ -26,9 +28,11 @@ namespace OffRoadWorld.Web.Controllers
 
         private string GetUserId() => User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-        public MarketplaceController(IMarketplaceService marketplaceService)
+        public MarketplaceController(IMarketplaceService marketplaceService,
+            IStringLocalizer<MarketplaceController> localizer)
         {
             this.marketplaceService = marketplaceService;
+            this.localizer = localizer;
         }
 
         public async Task<IActionResult> Index(string search, int page = 1, int pageSize = 8)
@@ -71,24 +75,26 @@ namespace OffRoadWorld.Web.Controllers
 
                 if (vehicle == null)
                 {
-                    TempData[ErrorMessage] = "The vehicle you are trying to buy does not exist!";
+                    TempData[ErrorMessage] = localizer["The vehicle you are trying to buy does not exist!"].ToString();
                     return RedirectToAction(nameof(Index));
                 }
 
                 if (vehicle.OwnerId == GetUserId())
                 {
-                    TempData[WarningMessage] = "You already own this vehicle!";
+                    TempData[WarningMessage] = localizer["You already own this vehicle!"].ToString();
                     return RedirectToAction("MyVehicles", "Vehicle");
                 }
 
                 await marketplaceService.BuyVehicleAsync(GetUserId(), id);
 
-                TempData[SuccessMessage] = $"Successfully bought {vehicle.Make} {vehicle.Model} for ${vehicle.Price}.";
+                TempData[SuccessMessage] = localizer["Successfully bought {0} {1} for ${2}.",
+                                                    vehicle.Make, vehicle.Model, vehicle.Price.ToString("f2")].ToString();
+
                 return RedirectToAction(nameof(Index));
             }
             catch (ArgumentException)
             {
-                TempData[WarningMessage] = "You don't have enough money to buy this vehicle!";
+                TempData[WarningMessage] = localizer["You don't have enough money to buy this vehicle!"].ToString();
                 return RedirectToAction(nameof(Index));
             }
         }
@@ -100,19 +106,21 @@ namespace OffRoadWorld.Web.Controllers
 
             if (model == null)
             {
-                TempData[ErrorMessage] = "The vehicle you are trying to sell does not exist!";
+                TempData[ErrorMessage] = localizer["The vehicle you are trying to sell does not exist!"].ToString();
                 return RedirectToAction(nameof(Index));
             }
 
             if (model!.OwnerId != GetUserId())
             {
-                TempData[ErrorMessage] = "You are not the owner of this vehicle.";
+                TempData[ErrorMessage] = localizer["You are not the owner of this vehicle."].ToString();
                 return RedirectToAction(nameof(Index));
             }
 
             if (marketplaceService.GetAllListingsAsync().Result.Any(l => l.VehicleId == model.Id))
             {
-                TempData[ErrorMessage] = $"Your {model.Make} {model.Model} is already listed for sale.";
+                TempData[ErrorMessage] = localizer["Your {0} {1} is already listed for sale.",
+                                                    model.Make, model.Model].ToString();
+
                 return RedirectToAction("MyVehicles", "Vehicle");
             }
 
@@ -127,13 +135,16 @@ namespace OffRoadWorld.Web.Controllers
 
             if (listing!.OwnerId != GetUserId())
             {
-                TempData[ErrorMessage] = "You are not the owner of this vehicle.";
+                TempData[ErrorMessage] = localizer["You are not the owner of this vehicle."].ToString();
+
                 return RedirectToAction(nameof(Index));
             }
 
             await marketplaceService.AddListingAsync(id, vehicle);
 
-            TempData[SuccessMessage] = $"{listing.Make} {listing.Model} was successfully added for selling in Marketplace for ${listing.Price}.";
+            TempData[SuccessMessage] = localizer["{0} {1} was successfully added for selling in " +
+                "                                   Marketplace for ${2}.", listing.Make, listing.Model, listing.Price.ToString("f2")].ToString();
+            
             return RedirectToAction(nameof(Index));
         }
 
@@ -144,7 +155,7 @@ namespace OffRoadWorld.Web.Controllers
 
             if (model.OwnerId != GetUserId())
             {
-                TempData[ErrorMessage] = "You are not the owner of this vehicle.";
+                TempData[ErrorMessage] = localizer["You are not the owner of this vehicle."].ToString();
                 return RedirectToAction(nameof(Index));
             }
 
@@ -159,11 +170,12 @@ namespace OffRoadWorld.Web.Controllers
 
             if (model.OwnerId != GetUserId())
             {
-                TempData[ErrorMessage] = "You are not the owner of this vehicle.";
+                TempData[ErrorMessage] = localizer["You are not the owner of this vehicle."].ToString();
                 return RedirectToAction(nameof(Index));
             }
 
-            TempData[SuccessMessage] = $"You have successfully removed your {model.Make} from the Marketplace!";
+            TempData[SuccessMessage] = localizer["You have successfully removed your {0} {1} from the Marketplace!", 
+                                                        model.Make, model.Model].ToString();
             await marketplaceService.RemoveListingAsync(id);
 
             return RedirectToAction(nameof(Index));
