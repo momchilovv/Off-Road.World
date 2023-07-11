@@ -117,10 +117,37 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Choose a language" xml:space="preserve">
-    <value>Избор на език</value>
+  <data name="Address:" xml:space="preserve">
+    <value>Адрес:</value>
   </data>
-  <data name="Language:" xml:space="preserve">
-    <value>Език:</value>
+  <data name="Back to All Events" xml:space="preserve">
+    <value>Назад към Всички Събития</value>
+  </data>
+  <data name="Category:" xml:space="preserve">
+    <value>Категория:</value>
+  </data>
+  <data name="Created on:" xml:space="preserve">
+    <value>Създадено на:</value>
+  </data>
+  <data name="Description:" xml:space="preserve">
+    <value>Описание:</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Редактиране</value>
+  </data>
+  <data name="Location:" xml:space="preserve">
+    <value>Локация:</value>
+  </data>
+  <data name="Owner:" xml:space="preserve">
+    <value>Организатор:</value>
+  </data>
+  <data name="Participants:" xml:space="preserve">
+    <value>Участници:</value>
+  </data>
+  <data name="Starts at:" xml:space="preserve">
+    <value>Стартира:</value>
+  </data>
+  <data name="{0} Details" xml:space="preserve">
+    <value>Детайли за {0}</value>
   </data>
 </root>

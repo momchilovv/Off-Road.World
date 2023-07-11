@@ -1,6 +1,9 @@
-﻿@model EventDetailsViewModel
+﻿@inject IViewLocalizer Localizer
+
+@model EventDetailsViewModel
+
 @{
-    ViewBag.Title = $"{Model.Title} Details";
+    ViewBag.Title = Localizer["{0} Details", Model.Title];
 }
 
 <h2 class="text-center">@ViewBag.Title</h2>
@@ -9,20 +12,20 @@
 <div class="row" style="display: flex; justify-content: center; align-items: center;">
     <div class="card w-50">
         <div class="card-body">
-            <p class="mb-0"><span class="fw-bold">Description: </span>@Model.Description</p>
-            <p class="mb-0"><span class="fw-bold">Starts at: </span>@Model.Start.ToString("dd-MM-yyyy HH:mm")</p>
-            <p class="mb-0"><span class="fw-bold">Owner: </span>@Model.Owner</p>
-            <p class="mb-0"><span class="fw-bold">Created on: </span>@Model.CreatedOn.ToString("dd-MM-yyyy HH:mm")</p>
-            <p class="mb-0"><span class="fw-bold">Location: </span>@Model.Location</p>
-            <p class="mb-0"><span class="fw-bold">Address: </span>@Model.Address</p>
-            <p class="mb-0"><span class="fw-bold">Category: </span>@Model.Category</p>
-            <p class="mb-0"><span class="fw-bold">Participants: </span>@Model.TotalParticipants</p>
+            <p class="mb-0"><span class="fw-bold">@Localizer["Description:"] </span>@Model.Description</p>
+            <p class="mb-0"><span class="fw-bold">@Localizer["Starts at:"] </span>@Model.Start.ToString("dd-MM-yyyy HH:mm")</p>
+            <p class="mb-0"><span class="fw-bold">@Localizer["Owner:"] </span>@Model.Owner</p>
+            <p class="mb-0"><span class="fw-bold">@Localizer["Created on:"] </span>@Model.CreatedOn.ToString("dd-MM-yyyy HH:mm")</p>
+            <p class="mb-0"><span class="fw-bold">@Localizer["Location:"] </span>@Model.Location</p>
+            <p class="mb-0"><span class="fw-bold">@Localizer["Address:"] </span>@Model.Address</p>
+            <p class="mb-0"><span class="fw-bold">@Localizer["Category:"] </span>@Model.Category</p>
+            <p class="mb-0"><span class="fw-bold">@Localizer["Participants:"] </span>@Model.TotalParticipants</p>
         </div>
 
-        <a asp-controller="Event" asp-action="All" class="btn btn-primary mb-2 w-100 p-3 fw-bold">Back to All Events</a>
+        <a asp-controller="Event" asp-action="All" class="btn btn-primary mb-2 w-100 p-3 fw-bold">@Localizer["Back to All Events"]</a>
         @if (User.Identity!.Name == Model.Owner)
         {
-            <a asp-controller="Event" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Edit</a>
+            <a asp-controller="Event" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">@Localizer["Edit"]</a>
         }
 
     </div>

@@ -117,10 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Choose a language" xml:space="preserve">
-    <value>Избор на език</value>
+  <data name="Category:" xml:space="preserve">
+    <value>Категория:</value>
   </data>
-  <data name="Language:" xml:space="preserve">
-    <value>Език:</value>
+  <data name="here" xml:space="preserve">
+    <value>тук</value>
+  </data>
+  <data name="Joined Events" xml:space="preserve">
+    <value>Участие в Събития</value>
+  </data>
+  <data name="Leave Event" xml:space="preserve">
+    <value>Напусни Събитието</value>
+  </data>
+  <data name="Location:" xml:space="preserve">
+    <value>Локация:</value>
+  </data>
+  <data name="Start:" xml:space="preserve">
+    <value>Начало:</value>
+  </data>
+  <data name="View Details" xml:space="preserve">
+    <value>Детайли</value>
+  </data>
+  <data name="You are not participating in any events." xml:space="preserve">
+    <value>Все още не си се присъединил към събитие.</value>
+  </data>
+  <data name="You can browse all open events" xml:space="preserve">
+    <value>Можеш да видиш всички отворени събития</value>
   </data>
 </root>
