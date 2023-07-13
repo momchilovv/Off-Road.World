@@ -51,7 +51,6 @@ var app = builder.Build();
 var localizationOptions = app.Services.GetService<IOptions<RequestLocalizationOptions>>();
 app.UseRequestLocalization(localizationOptions!.Value);
 
-
 if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();

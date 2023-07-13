@@ -1,4 +1,6 @@
-﻿@{
+﻿@inject IViewLocalizer Localizer
+
+@{
     if (ViewData.TryGetValue("ParentLayout", out var parentLayout) && parentLayout !=  null)
     {
         Layout = parentLayout.ToString();
@@ -9,7 +11,7 @@
     }
 }
 
-<h1>Manage your account</h1>
+<h1>@Localizer["Manage your account"]</h1>
 
 <div>
     <hr />

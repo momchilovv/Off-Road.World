@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Localization;
 using OffRoadWorld.Data.Models;
 using System.ComponentModel.DataAnnotations;
 
@@ -15,11 +16,14 @@ namespace OffRoadWorld.Web.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly IStringLocalizer<LoginModel> localizer;
 
-        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger,
+            IStringLocalizer<LoginModel> localizer)
         {
             _signInManager = signInManager;
             _logger = logger;
+            this.localizer = localizer;
         }
 
         /// <summary>
@@ -58,7 +62,7 @@ namespace OffRoadWorld.Web.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
+            [Required(ErrorMessage = "Email field is required.")]
             [EmailAddress]
             public string Email { get; set; }
 
@@ -66,7 +70,7 @@ namespace OffRoadWorld.Web.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
+            [Required(ErrorMessage = "Password field is required.")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
@@ -74,7 +78,6 @@ namespace OffRoadWorld.Web.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Display(Name = "Remember me?")]
             public bool RememberMe { get; set; }
         }
 
@@ -122,7 +125,7 @@ namespace OffRoadWorld.Web.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, localizer["Invalid login attempt."].ToString());
                     return Page();
                 }
             }
