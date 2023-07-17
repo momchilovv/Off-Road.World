@@ -1,11 +1,16 @@
 ﻿@page
+
+@inject IViewLocalizer Localizer
+
 @model DownloadPersonalDataModel
+
+
 @{
-    ViewData["Title"] = "Download Your Data";
-    ViewData["ActivePage"] = ManageNavPages.PersonalData;
+    ViewBag.Title = Localizer["Download Your Data"];
+    ViewBag.ActivePage = ManageNavPages.PersonalData;
 }
 
-<h3>@ViewData["Title"]</h3>
+<h3>@ViewBag.Title</h3>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

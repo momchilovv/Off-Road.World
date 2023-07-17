@@ -1,0 +1,190 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\momch\\source\\repos\\Off Road World\\OffRoadWorld.Web.ViewModels\\OffRoadWorld.Web.ViewModels.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\momch\\source\\repos\\Off Road World\\OffRoadWorld.Common\\OffRoadWorld.Common.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\momch\\source\\repos\\Off Road World\\OffRoadWorld.Common\\OffRoadWorld.Common.csproj",
+        "projectName": "OffRoadWorld.Common",
+        "projectPath": "C:\\Users\\momch\\source\\repos\\Off Road World\\OffRoadWorld.Common\\OffRoadWorld.Common.csproj",
+        "packagesPath": "C:\\Users\\momch\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\momch\\source\\repos\\Off Road World\\OffRoadWorld.Common\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\momch\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\momch\\source\\repos\\Off Road World\\OffRoadWorld.Data.Models\\OffRoadWorld.Data.Models.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\momch\\source\\repos\\Off Road World\\OffRoadWorld.Data.Models\\OffRoadWorld.Data.Models.csproj",
+        "projectName": "OffRoadWorld.Data.Models",
+        "projectPath": "C:\\Users\\momch\\source\\repos\\Off Road World\\OffRoadWorld.Data.Models\\OffRoadWorld.Data.Models.csproj",
+        "packagesPath": "C:\\Users\\momch\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\momch\\source\\repos\\Off Road World\\OffRoadWorld.Data.Models\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\momch\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\momch\\source\\repos\\Off Road World\\OffRoadWorld.Common\\OffRoadWorld.Common.csproj": {
+                "projectPath": "C:\\Users\\momch\\source\\repos\\Off Road World\\OffRoadWorld.Common\\OffRoadWorld.Common.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.16, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\momch\\source\\repos\\Off Road World\\OffRoadWorld.Web.ViewModels\\OffRoadWorld.Web.ViewModels.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\momch\\source\\repos\\Off Road World\\OffRoadWorld.Web.ViewModels\\OffRoadWorld.Web.ViewModels.csproj",
+        "projectName": "OffRoadWorld.Web.ViewModels",
+        "projectPath": "C:\\Users\\momch\\source\\repos\\Off Road World\\OffRoadWorld.Web.ViewModels\\OffRoadWorld.Web.ViewModels.csproj",
+        "packagesPath": "C:\\Users\\momch\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\momch\\source\\repos\\Off Road World\\OffRoadWorld.Web.ViewModels\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\momch\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\momch\\source\\repos\\Off Road World\\OffRoadWorld.Common\\OffRoadWorld.Common.csproj": {
+                "projectPath": "C:\\Users\\momch\\source\\repos\\Off Road World\\OffRoadWorld.Common\\OffRoadWorld.Common.csproj"
+              },
+              "C:\\Users\\momch\\source\\repos\\Off Road World\\OffRoadWorld.Data.Models\\OffRoadWorld.Data.Models.csproj": {
+                "projectPath": "C:\\Users\\momch\\source\\repos\\Off Road World\\OffRoadWorld.Data.Models\\OffRoadWorld.Data.Models.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
