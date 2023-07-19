@@ -149,6 +149,27 @@ namespace OffRoadWorld.Web.Controllers
         }
 
         [HttpGet]
+        public IActionResult AddFunds()
+        {
+            var model = new AddFundsFormModel();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddFunds(string userId, decimal amount)
+        {
+            userId = GetUserId();
+
+            await marketplaceService.AddFundsAsync(userId, amount);
+
+            TempData[SuccessMessage] = localizer["You have successfully added ${0} to your balance.", amount].ToString();
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
         public async Task<IActionResult> Remove(Guid id)
         {
             var model = await marketplaceService.GetVehicleByIdAsync(id);

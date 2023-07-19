@@ -16,5 +16,7 @@ namespace OffRoadWorld.Services.Data.Contracts
         Task AddListingAsync(Guid id, VehicleViewModel model);
 
         Task RemoveListingAsync(Guid id);
+
+        Task AddFundsAsync(string userId, decimal amount);
     }
 }

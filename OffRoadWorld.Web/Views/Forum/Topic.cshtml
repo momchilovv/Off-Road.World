@@ -1,0 +1,39 @@
+﻿@using System.Text.RegularExpressions;
+
+@inject IViewLocalizer Localizer
+
+@model List<TopicViewModel>
+
+@{
+    var currentCategory = Model.First(t => t.Forum != null).Forum;
+    ViewBag.Title = currentCategory;
+}
+
+<div class="container my-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h2 class="text-center mb-4">@currentCategory</h2>
+            <hr />
+            <div class="list-group">
+                @foreach (var topic in Model)
+                {
+                    var shortenedContent = topic.Content.Length >= 86 ? topic.Content.Substring(0, 86) + "..." : topic.Content;
+
+                    <a href="@Url.Action("Posts", "Forum", new { threadId = topic.Id })" class="list-group-item list-group-item-action">
+                        <div class="d-flex justify-content-between">
+                            <h5>@topic.Title</h5>
+                            <span class="badge badge-primary" style="color: grey; text-align: right;">
+                                @Localizer["Published:"] @topic.CreatedAt.ToString("dd-MMM-yyyy")
+                                <br />
+                                @topic.CreatedAt.ToString("HH:mm")
+                                <br />
+                                @Localizer["Started by:"] @Regex.Match(@topic.Owner.UserName, @"([A-Za-z]*)").Groups.Values.First()
+                            </span>
+                        </div>
+                        <p>@shortenedContent</p>
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+</div>

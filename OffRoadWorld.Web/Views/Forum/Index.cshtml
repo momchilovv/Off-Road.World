@@ -1,0 +1,28 @@
+﻿@inject IViewLocalizer Localizer
+
+@model List<ForumViewModel>
+
+@{
+    ViewBag.Title = Localizer["Forum"];
+}
+
+<div class="container my-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h2 class="text-center mb-4">@Localizer["Forum"]</h2>
+            <hr />
+            <div class="list-group">
+                @foreach (var category in Model)
+                {
+                    <a href="@Url.Action("Topic", "Forum", new { categoryId = category.Id })" class="list-group-item list-group-item-action">
+                        <div class="d-flex justify-content-between">
+                            <h5>@category.Title</h5>
+                            <span class="badge badge-primary" style="color: grey;">@category.TopicsCount @Localizer["topics"]</span>
+                          </div>
+                          <p>@category.Description</p>
+                      </a>
+                }
+            </div>
+        </div>
+    </div>
+</div>

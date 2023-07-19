@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OffRoadWorld.Data;
 
@@ -11,9 +12,10 @@ using OffRoadWorld.Data;
 namespace OffRoadWorld.Data.Migrations
 {
     [DbContext(typeof(OffRoadWorldDbContext))]
-    partial class OffRoadWorldDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230719080339_AddingForumThreadsAndPosts")]
+    partial class AddingForumThreadsAndPosts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -339,14 +341,14 @@ namespace OffRoadWorld.Data.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(45)
+                        .HasColumnType("nvarchar(45)")
                         .HasComment("Forum description.");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(35)
-                        .HasColumnType("nvarchar(35)")
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)")
                         .HasComment("Forum title.");
 
                     b.HasKey("Id");
@@ -410,37 +412,37 @@ namespace OffRoadWorld.Data.Migrations
                         .HasColumnType("nvarchar(450)")
                         .HasComment("Owner id.");
 
-                    b.Property<Guid>("TopicId")
+                    b.Property<Guid>("ThreadId")
                         .HasColumnType("uniqueidentifier")
-                        .HasComment("Topic id.");
+                        .HasComment("Thread id.");
 
                     b.HasKey("Id");
 
                     b.HasIndex("OwnerId");
 
-                    b.HasIndex("TopicId");
+                    b.HasIndex("ThreadId");
 
                     b.ToTable("Posts");
 
                     b.HasComment("Post");
                 });
 
-            modelBuilder.Entity("OffRoadWorld.Data.Models.Topic", b =>
+            modelBuilder.Entity("OffRoadWorld.Data.Models.Thread", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
-                        .HasComment("Topic id.");
+                        .HasComment("Thread id.");
 
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasMaxLength(2500)
                         .HasColumnType("nvarchar(2500)")
-                        .HasComment("Topic content.");
+                        .HasComment("Thread content.");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2")
-                        .HasComment("Topic created at.");
+                        .HasComment("Thread created at.");
 
                     b.Property<int>("ForumId")
                         .HasColumnType("int")
@@ -449,13 +451,13 @@ namespace OffRoadWorld.Data.Migrations
                     b.Property<string>("OwnerId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)")
-                        .HasComment("Topic owner");
+                        .HasComment("Thread owner");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(25)
-                        .HasColumnType("nvarchar(25)")
-                        .HasComment("Topic title.");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)")
+                        .HasComment("Thread title.");
 
                     b.HasKey("Id");
 
@@ -463,9 +465,9 @@ namespace OffRoadWorld.Data.Migrations
 
                     b.HasIndex("OwnerId");
 
-                    b.ToTable("Topics");
+                    b.ToTable("Threads");
 
-                    b.HasComment("Topic");
+                    b.HasComment("Thread");
                 });
 
             modelBuilder.Entity("OffRoadWorld.Data.Models.Vehicle", b =>
@@ -659,21 +661,21 @@ namespace OffRoadWorld.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("OffRoadWorld.Data.Models.Topic", "Topics")
+                    b.HasOne("OffRoadWorld.Data.Models.Thread", "Thread")
                         .WithMany("Posts")
-                        .HasForeignKey("TopicId")
+                        .HasForeignKey("ThreadId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Owner");
 
-                    b.Navigation("Topics");
+                    b.Navigation("Thread");
                 });
 
-            modelBuilder.Entity("OffRoadWorld.Data.Models.Topic", b =>
+            modelBuilder.Entity("OffRoadWorld.Data.Models.Thread", b =>
                 {
                     b.HasOne("OffRoadWorld.Data.Models.Forum", "Forum")
-                        .WithMany("TopicsCount")
+                        .WithMany("Threads")
                         .HasForeignKey("ForumId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -727,7 +729,7 @@ namespace OffRoadWorld.Data.Migrations
 
             modelBuilder.Entity("OffRoadWorld.Data.Models.Forum", b =>
                 {
-                    b.Navigation("TopicsCount");
+                    b.Navigation("Threads");
                 });
 
             modelBuilder.Entity("OffRoadWorld.Data.Models.Marketplace", b =>
@@ -735,7 +737,7 @@ namespace OffRoadWorld.Data.Migrations
                     b.Navigation("Vehicles");
                 });
 
-            modelBuilder.Entity("OffRoadWorld.Data.Models.Topic", b =>
+            modelBuilder.Entity("OffRoadWorld.Data.Models.Thread", b =>
                 {
                     b.Navigation("Posts");
                 });

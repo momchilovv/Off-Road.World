@@ -139,5 +139,15 @@ namespace OffRoadWorld.Services.Data.Services
 
             await dbContext.SaveChangesAsync();
         }
+
+        public async Task AddFundsAsync(string userId, decimal amount)
+        {
+            var user = await dbContext.Users
+                .FirstAsync(u => u.Id == userId);
+
+            user.Balance += amount;
+
+            await dbContext.SaveChangesAsync();
+        }
     }
 }

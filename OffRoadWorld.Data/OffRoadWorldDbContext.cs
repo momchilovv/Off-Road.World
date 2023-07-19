@@ -3,6 +3,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using OffRoadWorld.Data.Models;
+using Topic = OffRoadWorld.Data.Models.Topic;
 
 namespace OffRoadWorld.Data
 {
@@ -19,6 +20,12 @@ namespace OffRoadWorld.Data
         public DbSet<EventParticipants> EventParticipants { get; set; }
 
         public DbSet<Marketplace> Marketplace { get; set; }
+
+        public DbSet<Forum> Forums { get; set; }
+
+        public DbSet<Topic> Topics { get; set; }
+
+        public DbSet<Post> Posts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -48,6 +55,11 @@ namespace OffRoadWorld.Data
                 .HasOne(x => x.Vehicle)
                 .WithMany()
                 .HasForeignKey(x => x.VehicleId);
+
+            builder.Entity<Topic>()
+                .HasMany(p => p.Posts)
+                .WithOne(t => t.Topics)
+                .OnDelete(DeleteBehavior.Restrict);
 
             base.OnModelCreating(builder);
         }

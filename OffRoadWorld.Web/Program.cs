@@ -14,6 +14,7 @@ var connectionString = builder.Configuration.GetConnectionString("SQLServer");
 builder.Services.AddDbContext<OffRoadWorldDbContext>(options =>
     options.UseSqlServer(connectionString));
 
+builder.Services.AddScoped<IForumService, ForumService>();
 builder.Services.AddScoped<IEventService, EventService>();
 builder.Services.AddScoped<IVehicleService, VehicleService>();
 builder.Services.AddScoped<IMarketplaceService, MarketplaceService>();
@@ -75,5 +76,15 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=News}/{action=Index}/{id?}");
 app.MapRazorPages();
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "forum",
+        pattern: "Forum/Topic/{categoryId}",
+        defaults: new { controller = "Forum", action = "Topic" });
+
+    endpoints.MapRazorPages();
+});
 
 app.Run();

@@ -21,7 +21,6 @@
     <form id="selectLanguage" asp-controller="News" asp-action="SetLanguage" asp-route-returnUrl="@returnUrl" method="post" class="form-horizontal" role="form">
         <div class="row">
             <div class="col-md-6 offset-md-6">
-                @*<label class="text-muted">@Localizer["Language:"]</label>*@
                 <div class="btn-group">
                     <button type="submit" class="btn btn-secondary @(requestCulture?.RequestCulture.UICulture.Name == "bg-BG" ? "active" : "")" name="culture" value="bg-BG">
                         <img src="/images/bulgaria.png" alt="Bulgarian flag" style="width: 20px; height: 20px" />

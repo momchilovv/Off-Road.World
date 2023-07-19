@@ -41,5 +41,29 @@ namespace OffRoadWorld.Common
             public const int MinEngineCapacity = 49;
             public const int MaxEngineCapacity = 5500;
         }
+
+        public class Forum
+        {
+            public const int TitleMinLength = 3;
+            public const int TitleMaxLenght = 35;
+
+            public const int DescriptionMinLength = 20;
+            public const int DescriptionMaxLength = 100;
+        }
+
+        public class Topic
+        {
+            public const int TitleMinLength = 7;
+            public const int TitleMaxLength = 25;
+
+            public const int ContentMinLength = 40;
+            public const int ContentMaxLength = 2500;
+        }
+
+        public class Post
+        {
+            public const int ContentMinLength = 40;
+            public const int ContentMaxLength = 2500;
+        }
     }
 }

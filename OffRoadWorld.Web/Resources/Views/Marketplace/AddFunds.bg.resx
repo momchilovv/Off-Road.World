@@ -117,31 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Add Event" xml:space="preserve">
-    <value>Добави Събитие</value>
+  <data name="Add" xml:space="preserve">
+    <value>Добави</value>
   </data>
-  <data name="Add Vehicle" xml:space="preserve">
-    <value>Добави Превозно Средство</value>
+  <data name="Add funds" xml:space="preserve">
+    <value>Добави средства</value>
   </data>
-  <data name="Events" xml:space="preserve">
-    <value>Събития</value>
-  </data>
-  <data name="Forum" xml:space="preserve">
-    <value>Форум</value>
-  </data>
-  <data name="Joined Events" xml:space="preserve">
-    <value>Присъединени Събития</value>
-  </data>
-  <data name="Marketplace" xml:space="preserve">
-    <value>Обяви</value>
-  </data>
-  <data name="My Events" xml:space="preserve">
-    <value>Моите Събития</value>
-  </data>
-  <data name="My Vehicles" xml:space="preserve">
-    <value>Моите Превозни Средства</value>
-  </data>
-  <data name="News" xml:space="preserve">
-    <value>Новини</value>
+  <data name="Amount" xml:space="preserve">
+    <value>Сума</value>
   </data>
 </root>
