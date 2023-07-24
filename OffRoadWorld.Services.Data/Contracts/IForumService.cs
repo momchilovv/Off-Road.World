@@ -13,5 +13,7 @@ namespace OffRoadWorld.Services.Data.Contracts
         Task CreateCategoryAsync(CategoryFormModel model);
         
         Task AddTopicAsync(TopicFormModel model);
+
+        Task AddReplyAsync(Guid topicId, string userId, string reply);
     }
 }

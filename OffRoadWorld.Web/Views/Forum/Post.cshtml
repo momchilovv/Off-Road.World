@@ -17,6 +17,13 @@
             <div class="card">
                 <div class="card-header">
                     <h5>@ViewBag.Title</h5>
+                    <div style="text-align: right;">
+                        <span class="badge badge-primary" style="color: grey; text-align: right;">
+                            @Localizer["Published:"] @Model.Topic.CreatedAt.ToString("dd-MMM-yyyy")
+                            <br />
+                            @Model.Topic.CreatedAt.ToString("HH:mm")
+                        </span>
+                    </div>
                 </div>
                 <div class="card-body">
                     <p>@Model.Topic.Content</p>
@@ -40,12 +47,22 @@
                             </div>
                             <p>@post.Content</p>
                         </div>
-                        
-
-
                     }
                 </div>
             }
+            <br />
+            <form asp-controller="Forum" asp-action="AddReply" method="post">
+                <input type="hidden" name="topicId" value="@Model.Topic.Id" />
+                <div class="form-group card-header">
+                    <div class="col-12">
+                        <label>Reply: </label>
+                        <textarea name="reply" class="form-control" rows="5"></textarea>
+                    </div>
+                    <div class="col-4">
+                        <input class="btn btn-primary mt-2 float-lg-right" type="submit" value="Post" />
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>

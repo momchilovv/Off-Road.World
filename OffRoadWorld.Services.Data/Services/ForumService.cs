@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using OffRoadWorld.Data;
 using OffRoadWorld.Data.Models;
 using OffRoadWorld.Services.Data.Contracts;
@@ -55,6 +54,7 @@ namespace OffRoadWorld.Services.Data.Services
                     Id = t.Id,
                     Topic = new Topic
                     {
+                        Id = topicId,
                         Title = t.Title,
                         Content = t.Content
                     },
@@ -87,6 +87,20 @@ namespace OffRoadWorld.Services.Data.Services
             };
 
             await context.Topics.AddAsync(topic);
+            await context.SaveChangesAsync();
+        }
+
+        public async Task AddReplyAsync(Guid topicId, string userId, string reply)
+        {
+            var post = new Post()
+            {
+                Content = reply,
+                OwnerId = userId,
+                TopicId = topicId,
+                CreatedAt = DateTime.UtcNow
+            };
+
+            await context.Posts.AddAsync(post);
             await context.SaveChangesAsync();
         }
     }

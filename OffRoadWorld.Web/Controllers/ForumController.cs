@@ -80,5 +80,16 @@ namespace OffRoadWorld.Web.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddReply()
+        {
+            var topicId = Guid.Parse(Request.Form["topicId"]);
+
+            await forumService.AddReplyAsync(topicId, GetUserId(), Request.Form["reply"]);
+
+            return RedirectToAction("Post", new { topicId = topicId });
+        }
     }
 }
