@@ -1,5 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using OffRoadWorld.Data;
+using OffRoadWorld.Data.Models;
 using OffRoadWorld.Services.Data.Contracts;
 using OffRoadWorld.Web.ViewModels.Forum;
 
@@ -25,7 +27,8 @@ namespace OffRoadWorld.Services.Data.Services
                     Content = t.Content,
                     CreatedAt = t.CreatedAt,
                     Owner = t.Owner,
-                    Forum = t.Forum.Title
+                    Forum = t.Forum.Title,
+                    ForumId = t.ForumId
                 })
                 .ToListAsync();
         }
@@ -41,6 +44,50 @@ namespace OffRoadWorld.Services.Data.Services
                     TopicsCount = f.TopicsCount.Count()
                 })
                 .ToListAsync();
+        }
+
+        public async Task<PostViewModel> GetAllPostsAsync(Guid topicId)
+        {
+            return await context.Topics
+                .Where(t => t.Id == topicId)
+                .Select(t => new PostViewModel
+                {
+                    Id = t.Id,
+                    Topic = new Topic
+                    {
+                        Title = t.Title,
+                        Content = t.Content
+                    },
+                    Posts = t.Posts
+                })
+                .FirstAsync();
+        }
+
+        public async Task CreateCategoryAsync(CategoryFormModel model)
+        {
+            var category = new Forum()
+            {
+                Title = model.Title,
+                Description = model.Description
+            };
+
+            await context.Forums.AddAsync(category);
+            await context.SaveChangesAsync();
+        }
+
+        public async Task AddTopicAsync(TopicFormModel model)
+        {
+            var topic = new Topic()
+            {
+                Title = model.Title,
+                Content= model.Content,
+                CreatedAt = DateTime.UtcNow,
+                OwnerId = model.OwnerId,
+                ForumId = model.ForumId
+            };
+
+            await context.Topics.AddAsync(topic);
+            await context.SaveChangesAsync();
         }
     }
 }

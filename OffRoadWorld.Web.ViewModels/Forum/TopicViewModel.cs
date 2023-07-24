@@ -17,5 +17,7 @@ namespace OffRoadWorld.Web.ViewModels.Forum
         public ApplicationUser Owner { get; set; }
 
         public string Forum { get; set; }
+
+        public int ForumId { get; set; }
     }
 }

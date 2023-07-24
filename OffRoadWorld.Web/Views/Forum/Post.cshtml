@@ -1,0 +1,51 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@using OffRoadWorld.Data.Models;
+@using System.Text.RegularExpressions;
+
+@inject IViewLocalizer Localizer
+@inject UserManager<ApplicationUser> userManager;
+
+@model PostViewModel
+
+@{
+    ViewBag.Title = Model.Topic.Title;
+}
+
+<div class="container my-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header">
+                    <h5>@ViewBag.Title</h5>
+                </div>
+                <div class="card-body">
+                    <p>@Model.Topic.Content</p>
+                </div>
+            </div>
+
+            @if (Model.Posts != null && Model.Posts.Count > 0)
+            {
+                <h4 class="mt-4">Replies:</h4>
+                <div class="list-group">
+                    @foreach (var post in Model.Posts.OrderBy(o => o.CreatedAt))
+                    {
+                        <div class="list-group-item">
+                            <h5>@Regex.Match(@userManager.FindByIdAsync(post.OwnerId).Result.UserName, @"([A-Za-z]*)").Groups.Values.First()</h5>
+                            <div style="text-align: right;">
+                                <span class="badge badge-primary" style="color: grey; text-align: right;">
+                                    @Localizer["Published:"] @post.CreatedAt.ToString("dd-MMM-yyyy")
+                                    <br />
+                                    @post.CreatedAt.ToString("HH:mm")
+                                </span>
+                            </div>
+                            <p>@post.Content</p>
+                        </div>
+                        
+
+
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>

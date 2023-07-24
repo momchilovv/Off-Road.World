@@ -7,5 +7,11 @@ namespace OffRoadWorld.Services.Data.Contracts
         Task<List<ForumViewModel>> GetAllForumCategoriesAsync();
 
         Task<List<TopicViewModel>> GetAllTopicsFromCategoryAsync(int categoryId);
+
+        Task<PostViewModel> GetAllPostsAsync(Guid topicId);
+
+        Task CreateCategoryAsync(CategoryFormModel model);
+        
+        Task AddTopicAsync(TopicFormModel model);
     }
 }
