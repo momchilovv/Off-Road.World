@@ -6,6 +6,7 @@ using OffRoadWorld.Data.Models;
 using OffRoadWorld.Services.Data.Contracts;
 using OffRoadWorld.Services.Data.Services;
 using Microsoft.AspNetCore.Identity;
+using OffRoadWorld.Web.Modelbinders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,7 +32,11 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 })
     .AddEntityFrameworkStores<OffRoadWorldDbContext>();
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews()
+    .AddMvcOptions(options =>
+    {
+        options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
+    });
 
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 
