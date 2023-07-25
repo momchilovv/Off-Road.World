@@ -70,6 +70,22 @@ namespace OffRoadWorld.Web.Controllers
         }
 
         [HttpPost]
+        public async Task<IActionResult> UpdatePostContent(Guid postId, string content)
+        {
+            await forumService.UpdatePostContentAsync(postId, content);
+
+            return Ok();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateTopicContent(Guid topicId, string content)
+        {
+            await forumService.UpdateTopicAsync(topicId, content);
+
+            return Ok();
+        }
+
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddTopic(TopicFormModel model, int categoryId)
         {

@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OffRoadWorld.Data;
-using OffRoadWorld.Data.Models;
 using OffRoadWorld.Services.Data.Contracts;
 using OffRoadWorld.Web.ViewModels.Forum;
+using Forum = OffRoadWorld.Data.Models.Forum;
+using Post = OffRoadWorld.Data.Models.Post;
+using Topic = OffRoadWorld.Data.Models.Topic;
 
 namespace OffRoadWorld.Services.Data.Services
 {
@@ -45,6 +47,28 @@ namespace OffRoadWorld.Services.Data.Services
                 .ToListAsync();
         }
 
+        public async Task UpdatePostContentAsync(Guid id, string content)
+        {
+            var post = await context.Posts.FindAsync(id);
+
+            if (post != null)
+            {
+                post.Content = content;
+                await context.SaveChangesAsync();
+            }
+        }
+
+        public async Task UpdateTopicAsync(Guid id, string content)
+        {
+            var topic = await context.Topics.FindAsync(id);
+
+            if (topic != null)
+            {
+                topic.Content = content;
+                await context.SaveChangesAsync();
+            }
+        }
+
         public async Task<PostViewModel> GetAllPostsAsync(Guid topicId)
         {
             return await context.Topics
@@ -56,7 +80,10 @@ namespace OffRoadWorld.Services.Data.Services
                     {
                         Id = topicId,
                         Title = t.Title,
-                        Content = t.Content
+                        Content = t.Content,
+                        OwnerId = t.OwnerId,
+                        ForumId = t.ForumId,
+                        Owner = t.Owner
                     },
                     Posts = t.Posts
                 })

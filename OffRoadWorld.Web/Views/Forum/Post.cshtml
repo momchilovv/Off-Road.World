@@ -11,6 +11,138 @@
     ViewBag.Title = Model.Topic.Title;
 }
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(document).on('click', '.edit-topic-btn', function () {
+            var $topicTitle = $('.topic-title');
+            var $content = $('.content');
+            var $editArea = $('.edit-topic-area');
+            var $saveBtn = $('.save-topic-btn');
+            var $editBtn = $(this);
+
+            $editArea.val($content.text());
+            $content.hide();
+            $topicTitle.hide();
+            $editArea.show();
+            $saveBtn.show();
+            $editBtn.hide();
+        });
+
+        $(document).on('click', '.save-topic-btn', function () {
+            var topicId = '@Model.Topic.Id';
+            var editedContent = $('.edit-topic-area').val();
+
+            $.ajax({
+                type: "POST",
+                url: "/Forum/UpdateTopicContent",
+                data: { topicId: topicId, content: editedContent },
+                success: function () {
+                    var $content = $('.content');
+                    var $topicTitle = $('.topic-title');
+                    var $editArea = $('.edit-topic-area');
+                    var $saveBtn = $('.save-topic-btn');
+                    var $editBtn = $('.edit-topic-btn');
+
+                    $content.text(editedContent);
+                    $content.show();
+                    $topicTitle.show();
+                    $editArea.hide();
+                    $saveBtn.hide();
+                    $editBtn.show();
+                },
+                error: function () {
+                    alert("@Localizer["An error occurred while saving the topic."]");
+                }
+            });
+        });
+
+        $(document).on('click', '.edit-btn', function () {
+            var $reply = $(this).closest('.reply');
+            var $content = $reply.find('.content');
+            var $editArea = $reply.find('.edit-area');
+            var $saveBtn = $reply.find('.save-btn');
+            var $editBtn = $(this);
+
+            $editArea.val($content.text());
+            $content.hide();
+            $editArea.show();
+            $saveBtn.show();
+            $editBtn.hide();
+        });
+
+        $(document).on('click', '.save-btn', function () {
+            var $reply = $(this).closest('.reply');
+            var postId = $reply.data('post-id');
+            var editedContent = $reply.find('.edit-area').val();
+
+            $.ajax({
+                type: "POST",
+                url: "/Forum/UpdatePostContent",
+                data: { postId: postId, content: editedContent },
+                success: function () {
+                    var $content = $reply.find('.content');
+                    var $editArea = $reply.find('.edit-area');
+                    var $saveBtn = $reply.find('.save-btn');
+                    var $editBtn = $reply.find('.edit-btn');
+
+                    $content.text(editedContent);
+                    $content.show();
+                    $editArea.hide();
+                    $saveBtn.hide();
+                    $editBtn.show();
+                },
+                error: function () {
+                    alert("@Localizer["An error occurred while saving the post."]");
+                }
+            });
+        });
+
+        $(document).on('click', '.edit-reply-btn', function () {
+            var $reply = $(this).closest('.reply');
+            var $content = $reply.find('.replyContent');
+            var $editArea = $reply.find('.edit-reply-area');
+            var $saveBtn = $reply.find('.save-reply-btn');
+            var $editBtn = $(this);
+
+            $editArea.val($content.text());
+            $content.hide();
+            $editArea.show();
+            $saveBtn.show();
+            $editBtn.hide();
+        });
+
+        $(document).on('click', '.save-reply-btn', function () {
+            var $reply = $(this).closest('.reply');
+            var postId = $reply.data('post-id');
+            var editedContent = $reply.find('.edit-reply-area').val();
+
+            $.ajax({
+                type: "POST",
+                url: "/Forum/UpdatePostContent",
+                data: { postId: postId, content: editedContent },
+                success: function () {
+                    var $content = $reply.find('.replyContent');
+                    var $editArea = $reply.find('.edit-reply-area');
+                    var $saveBtn = $reply.find('.save-reply-btn');
+                    var $editBtn = $reply.find('.edit-reply-btn');
+
+                    $content.text(editedContent);
+                    $content.show();
+                    $editArea.hide();
+                    $saveBtn.hide();
+                    $editBtn.show();
+                },
+                error: function () {
+                    alert("@Localizer["An error occurred while saving the post."]");
+                }
+            });
+        });
+    });
+</script>
+
+<a class="btn btn-secondary mt-2 offset-md-2" href="@Url.Action("Topic", "Forum", new { categoryId = Model.Topic.ForumId })" type="submit">@Localizer["Back"]</a>
+<br />
 <div class="container my-4">
     <div class="row">
         <div class="col-md-8 offset-md-2">
@@ -18,34 +150,56 @@
                 <div class="card-header">
                     <h5>@ViewBag.Title</h5>
                     <div style="text-align: right;">
-                        <span class="badge badge-primary" style="color: grey; text-align: right;">
+                        <span class="badge badge-primary" style="color: grey; text-align: right; margin-top: -30px;">
                             @Localizer["Published:"] @Model.Topic.CreatedAt.ToString("dd-MMM-yyyy")
                             <br />
                             @Model.Topic.CreatedAt.ToString("HH:mm")
+                            <br />
+                            @Localizer["Started by:"] @Regex.Match(@userManager.FindByIdAsync(Model.Topic.OwnerId).Result.UserName, @"([A-Za-z]*)").Groups.Values.First()
                         </span>
                     </div>
                 </div>
                 <div class="card-body">
-                    <p>@Model.Topic.Content</p>
+                    <div class="content">@Model.Topic.Content</div>
+                    <br />
+                    @if (User.Identity!.Name == Model.Topic.Owner.UserName)
+                    {
+                        <button class="edit-topic-btn btn btn-primary">@Localizer["Edit"]</button>             
+                        <textarea class="edit-topic-area form-control" rows="5" style="display: none;"></textarea>
+                        <br />
+                        <button class="save-topic-btn btn btn-success" style="display: none;">@Localizer["Save"]</button>
+                    }
                 </div>
             </div>
 
             @if (Model.Posts != null && Model.Posts.Count > 0)
             {
-                <h4 class="mt-4">Replies:</h4>
+                <h4 class="mt-4">@Localizer["Replies:"]</h4>
                 <div class="list-group">
                     @foreach (var post in Model.Posts.OrderBy(o => o.CreatedAt))
                     {
                         <div class="list-group-item">
-                            <h5>@Regex.Match(@userManager.FindByIdAsync(post.OwnerId).Result.UserName, @"([A-Za-z]*)").Groups.Values.First()</h5>
+                            <h5></h5>
                             <div style="text-align: right;">
                                 <span class="badge badge-primary" style="color: grey; text-align: right;">
                                     @Localizer["Published:"] @post.CreatedAt.ToString("dd-MMM-yyyy")
                                     <br />
                                     @post.CreatedAt.ToString("HH:mm")
+                                    <br />
+                                    @Localizer["Answer by:"] @Regex.Match(@userManager.FindByIdAsync(post.OwnerId).Result.UserName, @"([A-Za-z]*)").Groups.Values.First()
                                 </span>
                             </div>
-                            <p>@post.Content</p>
+                            <div class="reply" data-post-id="@post.Id">
+                                <div class="replyContent" style="margin-top: -30px;">@post.Content</div>
+                                <br />
+                                @if (User.Identity!.Name == post.Owner.UserName)
+                                {
+                                    <textarea class="edit-reply-area form-control" rows="3" style="display: none;"></textarea>
+                                    <button class="edit-reply-btn btn btn-primary">@Localizer["Edit"]</button>
+                                    <br />
+                                    <button class="save-reply-btn btn btn-success" style="display: none;">@Localizer["Save"]</button>
+                                }
+                            </div>
                         </div>
                     }
                 </div>
@@ -55,11 +209,11 @@
                 <input type="hidden" name="topicId" value="@Model.Topic.Id" />
                 <div class="form-group card-header">
                     <div class="col-12">
-                        <label>Reply: </label>
+                        <label>@Localizer["Reply:"] </label>
                         <textarea name="reply" class="form-control" rows="5"></textarea>
                     </div>
                     <div class="col-4">
-                        <input class="btn btn-primary mt-2 float-lg-right" type="submit" value="Post" />
+                        <input class="btn btn-primary mt-2 float-lg-right" type="submit" value="@Localizer["Post"]" />
                     </div>
                 </div>
             </form>

@@ -117,28 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Answer by:" xml:space="preserve">
+    <value>Отговор от:</value>
+  </data>
   <data name="Back" xml:space="preserve">
     <value>Назад</value>
   </data>
-  <data name="Forum" xml:space="preserve">
-    <value>Форум</value>
+  <data name="Edit" xml:space="preserve">
+    <value>Редактиране</value>
   </data>
-  <data name="here" xml:space="preserve">
-    <value>тук</value>
-  </data>
-  <data name="New Topic" xml:space="preserve">
-    <value>Нова Тема</value>
+  <data name="Post" xml:space="preserve">
+    <value>Публикувай</value>
   </data>
   <data name="Published:" xml:space="preserve">
     <value>Публикувана:</value>
   </data>
+  <data name="Replies:" xml:space="preserve">
+    <value>Отговори:</value>
+  </data>
+  <data name="Reply:" xml:space="preserve">
+    <value>Отговор:</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Запази</value>
+  </data>
   <data name="Started by:" xml:space="preserve">
     <value>Стартирана от:</value>
-  </data>
-  <data name="There are still no topics added to this forum category." xml:space="preserve">
-    <value>Все още няма добавени теми към тази категория.</value>
-  </data>
-  <data name="You can create one by clicking" xml:space="preserve">
-    <value>Можете да добавите една като натиснете</value>
   </data>
 </root>
