@@ -142,8 +142,8 @@ namespace OffRoadWorld.Web.Controllers
 
             await marketplaceService.AddListingAsync(id, vehicle);
 
-            TempData[SuccessMessage] = localizer["{0} {1} was successfully added for selling in " +
-                "                                   Marketplace for ${2}.", listing.Make, listing.Model, listing.Price.ToString("f2")].ToString();
+            TempData[SuccessMessage] = localizer["{0} {1} was successfully added for selling in Marketplace for ${2}.", 
+                listing.Make, listing.Model, listing.Price.ToString("f2")].ToString();
             
             return RedirectToAction(nameof(Index));
         }
