@@ -78,6 +78,22 @@ namespace OffRoadWorld.Web.Controllers
         }
 
         [HttpPost]
+        public async Task<IActionResult> DeletePost(Guid postId)
+        {
+            await forumService.DeletePost(postId);
+
+            return Ok();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteTopic(Guid topicId)
+        {
+            await forumService.DeleteTopic(topicId);
+
+            return Ok();
+        }
+
+        [HttpPost]
         public async Task<IActionResult> UpdateTopicContent(Guid topicId, string content)
         {
             await forumService.UpdateTopicAsync(topicId, content);

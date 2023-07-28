@@ -19,5 +19,9 @@ namespace OffRoadWorld.Services.Data.Contracts
         Task UpdatePostContentAsync(Guid id, string content);
 
         Task UpdateTopicAsync(Guid id, string content);
+
+        Task DeletePost(Guid id);
+
+        Task DeleteTopic(Guid id);
     }
 }

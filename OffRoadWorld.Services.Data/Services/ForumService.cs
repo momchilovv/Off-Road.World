@@ -107,7 +107,7 @@ namespace OffRoadWorld.Services.Data.Services
             var topic = new Topic()
             {
                 Title = model.Title,
-                Content= model.Content,
+                Content = model.Content,
                 CreatedAt = DateTime.UtcNow,
                 OwnerId = model.OwnerId,
                 ForumId = model.ForumId
@@ -128,6 +128,22 @@ namespace OffRoadWorld.Services.Data.Services
             };
 
             await context.Posts.AddAsync(post);
+            await context.SaveChangesAsync();
+        }
+
+        public async Task DeletePost(Guid id)
+        {
+            var post = await context.Posts.FindAsync(id);
+
+            context.Posts.Remove(post!);
+            await context.SaveChangesAsync();
+        }
+
+        public async Task DeleteTopic(Guid id)
+        {
+            var topic = await context.Topics.FindAsync(id);
+
+            context.Topics.Remove(topic!);
             await context.SaveChangesAsync();
         }
     }
