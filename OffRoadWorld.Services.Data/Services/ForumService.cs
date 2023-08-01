@@ -31,6 +31,7 @@ namespace OffRoadWorld.Services.Data.Services
                     Forum = t.Forum.Title,
                     ForumId = t.ForumId
                 })
+                .OrderByDescending(t => t.CreatedAt)
                 .ToListAsync();
         }
 

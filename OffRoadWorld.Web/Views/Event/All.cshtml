@@ -1,4 +1,8 @@
-﻿@inject IViewLocalizer Localizer
+﻿@using Microsoft.AspNetCore.Identity;
+@using OffRoadWorld.Data.Models;
+
+@inject IViewLocalizer Localizer
+@inject UserManager<ApplicationUser> userManager
 
 @model List<EventViewModel>
 
@@ -29,9 +33,20 @@
                 }
                 else
                 {
-                    <form class="input-group-sm " asp-controller="Event" asp-action="Join" asp-route-id="@e.Id">
-                        <input type="submit" value="@Localizer["Join Event"]" class="fs-6 btn btn-success mb-2 w-100 p-3 fw-bold" />
-                    </form>
+                    var currentUserId = userManager.GetUserId(User);
+
+                    if (e.Participants.Any(e => e.ParticipantId == currentUserId))
+                    {
+                        <form id="leaveEventForm" class="input-group-sm " asp-controller="Event" asp-action="LeaveEvent" asp-route-id="@e.Id">
+                            <input type="submit" value="@Localizer["Leave Event"]" class="fs-6 btn btn-danger mb-2 w-100 p-3 fw-bold" />
+                        </form>
+                    }
+                    else
+                    {
+                        <form class="input-group-sm " asp-controller="Event" asp-action="Join" asp-route-id="@e.Id">
+                            <input type="submit" value="@Localizer["Join Event"]" class="fs-6 btn btn-success mb-2 w-100 p-3 fw-bold" />
+                        </form>
+                    }
                 }
             </div>
         }

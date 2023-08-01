@@ -9,6 +9,19 @@ namespace OffRoadWorld.Web.Controllers
     {
         private readonly IForumService forumService;
 
+        private async Task<ICollection<TopicViewModel>> GetItemsForPage(int categoryId, int page, int itemsPerPage)
+        {
+            var allListings = await forumService.GetAllTopicsFromCategoryAsync(categoryId);
+
+            int startIndex = (page - 1) * itemsPerPage;
+            var listings = allListings
+                .Skip(startIndex)
+                .Take(itemsPerPage)
+                .ToList();
+
+            return listings;
+        }
+
         private string GetUserId() => User.FindFirstValue(ClaimTypes.NameIdentifier);
 
         public ForumController(IForumService forumService)
@@ -23,11 +36,18 @@ namespace OffRoadWorld.Web.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> Topic(int categoryId)
+        public async Task<IActionResult> Topic(int categoryId, int page = 1, int pageSize = 6)
         {
             TempData["CategoryId"] = categoryId;
 
-            var model = await forumService.GetAllTopicsFromCategoryAsync(categoryId);
+            var allTopics = await forumService.GetAllTopicsFromCategoryAsync(categoryId);
+            
+            int topics = allTopics.Count();
+
+            var model = await GetItemsForPage(categoryId, page, pageSize);
+
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = (int)Math.Ceiling((double)topics / pageSize);
 
             return View(model);
         }

@@ -129,6 +129,12 @@
   <data name="New Topic" xml:space="preserve">
     <value>Нова Тема</value>
   </data>
+  <data name="Next" xml:space="preserve">
+    <value>Следваща</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>Предишна</value>
+  </data>
   <data name="Published:" xml:space="preserve">
     <value>Публикувана:</value>
   </data>

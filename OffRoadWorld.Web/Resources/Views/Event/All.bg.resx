@@ -126,6 +126,9 @@
   <data name="Join Event" xml:space="preserve">
     <value>Присъедини се</value>
   </data>
+  <data name="Leave Event" xml:space="preserve">
+    <value>Напусни Събитието</value>
+  </data>
   <data name="Location:" xml:space="preserve">
     <value>Локация:</value>
   </data>

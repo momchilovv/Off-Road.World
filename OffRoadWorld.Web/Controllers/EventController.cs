@@ -155,13 +155,15 @@ namespace OffRoadWorld.Web.Controllers
 
         public async Task<IActionResult> LeaveEvent(int id)
         {
+            string referrerUrl = Request.Headers["Referer"].ToString();
+
             var _event = eventService.GetDetailsById(id);
 
             await eventService.LeaveEventAsync(GetUserId(), _event);
 
             TempData[SuccessMessage] = localizer["You have left {0} event!", _event.Title].ToString();
 
-            return RedirectToAction(nameof(Joined));
+            return Redirect(referrerUrl);
         }
 
         public async Task<IActionResult> Joined()

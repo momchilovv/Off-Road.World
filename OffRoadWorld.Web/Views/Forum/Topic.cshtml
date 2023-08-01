@@ -50,6 +50,22 @@
                 </div>
             </div>
         </div>
+        <div class="pagination">
+            @if (ViewBag.CurrentPage > 1)
+            {
+                <a href="?categoryId=@TempData["CategoryId"]&page=@(ViewBag.CurrentPage - 1)" class="previous">@Localizer["Previous"]</a>
+            }
+
+            @for (int i = 1; i <= ViewBag.TotalPages; i++)
+            {
+                <a href="?categoryId=@TempData["CategoryId"]&page=@i" class="@(i == ViewBag.CurrentPage ? "active" : "")">@i</a>
+            }
+
+            @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+            {
+                <a href="?categoryId=@TempData["CategoryId"]&page=@(ViewBag.CurrentPage + 1)" class="next">@Localizer["Next"]</a>
+            }
+        </div>
     </div>
 }
 else

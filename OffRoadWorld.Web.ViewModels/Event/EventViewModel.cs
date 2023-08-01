@@ -1,5 +1,7 @@
 ﻿#nullable disable
 
+using OffRoadWorld.Data.Models;
+
 namespace OffRoadWorld.Web.ViewModels.Event
 {
     public class EventViewModel
@@ -15,5 +17,7 @@ namespace OffRoadWorld.Web.ViewModels.Event
         public string Category { get; set; }
 
         public string Owner { get; set; }
+
+        public ICollection<EventParticipants> Participants { get; set; } = new List<EventParticipants>();
     }
 }

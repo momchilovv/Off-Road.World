@@ -28,7 +28,8 @@ namespace OffRoadWorld.Services.Data.Services
                     Category = e.Category.Name,
                     Start = e.Start,
                     Location = $"{e.City}, {e.Country}",
-                    Owner = e.Owner.UserName
+                    Owner = e.Owner.UserName,
+                    Participants = e.Participants
                 })
                 .ToListAsync();
         }
