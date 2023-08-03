@@ -56,7 +56,10 @@
 
             @for (int i = 1; i <= ViewBag.TotalPages; i++)
             {
-                <a href="?page=@i" class="@(i == ViewBag.CurrentPage ? "active" : "")">@i</a>
+                if (ViewBag.TotalPages > 1)
+                {
+                    <a href="?page=@i" class="@(i == ViewBag.CurrentPage ? "active" : "")">@i</a>
+                }
             }
 
             @if (ViewBag.CurrentPage < ViewBag.TotalPages)

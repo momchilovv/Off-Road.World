@@ -157,6 +157,26 @@
                 });
             }
         });
+
+        $(document).on('click', '.delete-topic-btn', function () {
+            var $topic = $(this).closest('.topic');
+            var topicId = $topic.data('topic-id');
+
+            if (confirm("Are you sure you want to delete this topic?")) {
+                $.ajax({
+                    type: "POST",
+                    url: "/Forum/DeleteTopic",
+                    data: { topicId: topicId },
+                    success: function () {
+                        var categoryId = '@Model.Topic.ForumId';
+                        window.location.href = '/Forum/Topic?categoryId=' + categoryId;
+                    },
+                    error: function () {
+                        alert("An error occurred while deleting the topic.");
+                    }
+                });
+            }
+        });
     });
 </script>
 
@@ -179,21 +199,23 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="content">@Model.Topic.Content</div>
-                    <br />
-                    @if (User.Identity!.Name == Model.Topic.Owner.UserName)
-                    {
-                        <textarea class="edit-topic-area form-control" rows="5" style="display: none;"></textarea>
-                        <a class="edit-topic-btn" href="#">
-                            <img src="~/images/pencil.png" width="22px" height="22px" alt="@Localizer["Edit"]" />
-                        </a>
-                        <a class="delete-topic-btn" href="#">
-                            <img src="~/images/trash.png" width="22px" height="22px" style="padding-left: 5px;" alt="@Localizer["Delete"]" />
-                        </a>
-
+                    <div class="topic" data-topic-id="@Model.Topic.Id">
+                        <div class="content">@Model.Topic.Content</div>
                         <br />
-                        <button class="save-topic-btn btn btn-success" style="display: none;">@Localizer["Save"]</button>
-                    }
+                        @if (User.Identity!.Name == Model.Topic.Owner.UserName)
+                        {
+                            <textarea class="edit-topic-area form-control" rows="5" style="display: none;"></textarea>
+                            <a class="edit-topic-btn" href="#">
+                                <img src="~/images/pencil.png" width="22px" height="22px" alt="@Localizer["Edit"]" />
+                            </a>
+                            <a class="delete-topic-btn" href="#">
+                                <img src="~/images/trash.png" width="22px" height="22px" style="padding-left: 5px;" alt="@Localizer["Delete"]" />
+                            </a>
+
+                            <br />
+                            <button class="save-topic-btn btn btn-success" style="display: none;">@Localizer["Save"]</button>
+                        }
+                    </div>
                 </div>
             </div>
 

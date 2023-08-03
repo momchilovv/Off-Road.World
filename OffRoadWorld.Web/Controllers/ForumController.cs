@@ -130,7 +130,7 @@ namespace OffRoadWorld.Web.Controllers
 
             await forumService.AddTopicAsync(model);
 
-            return RedirectToAction(nameof(Index));
+            return Redirect("Topic?categoryId=" + categoryId);
         }
 
         [HttpPost]

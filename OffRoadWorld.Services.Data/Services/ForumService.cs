@@ -84,13 +84,15 @@ namespace OffRoadWorld.Services.Data.Services
                         Content = t.Content,
                         OwnerId = t.OwnerId,
                         ForumId = t.ForumId,
-                        Owner = t.Owner
+                        Owner = t.Owner,
+                        CreatedAt = t.CreatedAt
                     },
                     Posts = t.Posts
                 })
                 .FirstAsync();
         }
 
+        //ADMIN ONLY
         public async Task CreateCategoryAsync(CategoryFormModel model)
         {
             var category = new Forum()
@@ -143,6 +145,10 @@ namespace OffRoadWorld.Services.Data.Services
         public async Task DeleteTopic(Guid id)
         {
             var topic = await context.Topics.FindAsync(id);
+
+            var posts = context.Posts.Where(post => post.TopicId == id).ToList();
+
+            context.Posts.RemoveRange(posts);
 
             context.Topics.Remove(topic!);
             await context.SaveChangesAsync();
