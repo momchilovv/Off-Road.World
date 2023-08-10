@@ -4,7 +4,7 @@
 </h1>
 
 <p align="center">
-  Welcome to Off-Road.World, the ultimate destination for off-road enthusiasts! Explore news, upcoming events, buy/sell vehicles, and join our forum where you can discuss everything.
+  Welcome to Off-Road.World, the ultimate destination for off-road enthusiasts! Explore news, upcoming events, buy/sell vehicles, and join the forum where you can discuss everything.
 </p>
 
 <!-- Features -->
