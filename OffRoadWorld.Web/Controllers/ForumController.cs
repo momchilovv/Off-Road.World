@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OffRoadWorld.Services.Data.Contracts;
 using OffRoadWorld.Web.ViewModels.Forum;
 using System.Security.Claims;
@@ -59,7 +60,7 @@ namespace OffRoadWorld.Web.Controllers
             return View(model);
         }
 
-        //ADMIN ONLY
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult AddCategory()
         {
@@ -68,7 +69,7 @@ namespace OffRoadWorld.Web.Controllers
             return View(model);
         }
 
-        //ADMIN ONLY
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddCategory(CategoryFormModel model)

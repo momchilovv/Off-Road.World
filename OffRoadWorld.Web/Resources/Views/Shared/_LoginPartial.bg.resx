@@ -117,6 +117,18 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Add Event" xml:space="preserve">
+    <value>Добави Събитие</value>
+  </data>
+  <data name="Add Forum Category" xml:space="preserve">
+    <value>Добави Форум Категория</value>
+  </data>
+  <data name="Add Vehicle" xml:space="preserve">
+    <value>Добави Превозно Средство</value>
+  </data>
+  <data name="Admin Panel" xml:space="preserve">
+    <value>Админ Панел</value>
+  </data>
   <data name="Logged in as:" xml:space="preserve">
     <value>Влязъл като:</value>
   </data>
@@ -128,6 +140,9 @@
   </data>
   <data name="Manage" xml:space="preserve">
     <value>Управление на профил</value>
+  </data>
+  <data name="My Events" xml:space="preserve">
+    <value>Моите Събития</value>
   </data>
   <data name="Register" xml:space="preserve">
     <value>Регистрация</value>

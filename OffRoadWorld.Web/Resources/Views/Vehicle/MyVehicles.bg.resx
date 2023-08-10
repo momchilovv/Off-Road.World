@@ -148,6 +148,6 @@
     <value>Можете да купите като разгледате</value>
   </data>
   <data name="You don't own any vehicles." xml:space="preserve">
-    <value>Нямате никакви превозни средства.</value>
+    <value>Нямате превозни средства.</value>
   </data>
 </root>

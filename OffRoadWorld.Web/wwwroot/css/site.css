@@ -83,3 +83,8 @@ input[type="number"] {
     display: inline-block;
     vertical-align: middle;
 }
+
+.custom-divider {
+    margin: 0;
+    border-top: 1px solid black;
+}

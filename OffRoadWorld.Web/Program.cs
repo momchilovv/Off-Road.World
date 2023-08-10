@@ -7,6 +7,8 @@ using OffRoadWorld.Services.Data.Contracts;
 using OffRoadWorld.Services.Data.Services;
 using Microsoft.AspNetCore.Identity;
 using OffRoadWorld.Web.Modelbinders;
+using static OffRoadWorld.Common.DataValidations;
+using System.Text.RegularExpressions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,6 +32,7 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
     options.Password.RequireUppercase = false;
     options.Password.RequireLowercase = false;
 })
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<OffRoadWorldDbContext>();
 
 builder.Services.AddControllersWithViews()
@@ -80,6 +83,44 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=News}/{action=Index}/{id?}");
+
+using(var scope = app.Services.CreateScope())
+{
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+    var roles = new[] { "Admin" };
+
+    foreach (var role in roles)
+    {
+        if (!await roleManager.RoleExistsAsync(role))
+        {
+            await roleManager.CreateAsync(new IdentityRole(role));
+        }
+    }
+
+}
+
+using(var scope = app.Services.CreateScope())
+{
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+    var email = "admin@off-road.world";
+    var password = "Admin1337!";
+
+    if (await userManager.FindByEmailAsync(email) == null)
+    {
+        var user = new ApplicationUser()
+        {
+            UserName = Regex.Match(email, @"([A-Za-z]*)").Groups.Values.First().ToString(),
+            Email = email
+        };
+
+        await userManager.CreateAsync(user, password);
+
+        await userManager.AddToRoleAsync(user, "Admin");
+    }
+}
+
 app.MapRazorPages();
 
 app.UseEndpoints(endpoints =>

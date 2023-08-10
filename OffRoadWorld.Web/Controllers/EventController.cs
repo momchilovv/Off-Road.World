@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using OffRoadWorld.Data.Models;
 using OffRoadWorld.Services.Data.Contracts;
 using OffRoadWorld.Web.ViewModels.Event;
+using System.Data;
 using System.Security.Claims;
 using static OffRoadWorld.Common.NotificationMessages;
 
@@ -32,6 +34,7 @@ namespace OffRoadWorld.Web.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Add()
         {
@@ -43,6 +46,7 @@ namespace OffRoadWorld.Web.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Add(EventFormModel model)
@@ -56,6 +60,7 @@ namespace OffRoadWorld.Web.Controllers
             return RedirectToAction(nameof(All));
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
@@ -70,6 +75,7 @@ namespace OffRoadWorld.Web.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, EventFormModel model)
@@ -86,6 +92,7 @@ namespace OffRoadWorld.Web.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult Delete(int id)
         {
@@ -100,6 +107,7 @@ namespace OffRoadWorld.Web.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Delete(EventDetailsViewModel model)
         {
@@ -146,6 +154,7 @@ namespace OffRoadWorld.Web.Controllers
             return RedirectToAction(nameof(All));
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> MyEvents()
         {
             var model = await eventService.GetMyEventsAsync(GetUserId());
