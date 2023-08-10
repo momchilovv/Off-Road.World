@@ -20,6 +20,7 @@
             var $editArea = $('.edit-topic-area');
             var $saveBtn = $('.save-topic-btn');
             var $editBtn = $(this);
+            var $deleteBtn = $('.delete-topic-btn');
 
             $editArea.val($content.text());
             $content.hide();
@@ -27,6 +28,7 @@
             $editArea.show();
             $saveBtn.show();
             $editBtn.hide();
+            $deleteBtn.hide();
         });
 
         $(document).on('click', '.save-topic-btn', function () {
@@ -43,6 +45,7 @@
                     var $editArea = $('.edit-topic-area');
                     var $saveBtn = $('.save-topic-btn');
                     var $editBtn = $('.edit-topic-btn');
+                    var $deleteBtn = $('.delete-topic-btn');
 
                     $content.text(editedContent);
                     $content.show();
@@ -50,6 +53,7 @@
                     $editArea.hide();
                     $saveBtn.hide();
                     $editBtn.show();
+                    $deleteBtn.show();
                 },
                 error: function () {
                     alert("@Localizer["An error occurred while saving the topic."]");
@@ -104,12 +108,14 @@
             var $editArea = $reply.find('.edit-reply-area');
             var $saveBtn = $reply.find('.save-reply-btn');
             var $editBtn = $(this);
+            var $deleteBtn = $reply.find('.delete-reply-btn');
 
             $editArea.val($content.text());
             $content.hide();
             $editArea.show();
             $saveBtn.show();
             $editBtn.hide();
+            $deleteBtn.hide();
         });
 
         $(document).on('click', '.save-reply-btn', function () {
@@ -126,12 +132,14 @@
                     var $editArea = $reply.find('.edit-reply-area');
                     var $saveBtn = $reply.find('.save-reply-btn');
                     var $editBtn = $reply.find('.edit-reply-btn');
+                    var $deleteBtn = $reply.find('.delete-reply-btn');
 
                     $content.text(editedContent);
                     $content.show();
                     $editArea.hide();
                     $saveBtn.hide();
                     $editBtn.show();
+                    $deleteBtn.show();
                 },
                 error: function () {
                     alert("An error occurred while saving the post.");
@@ -202,7 +210,7 @@
                     <div class="topic" data-topic-id="@Model.Topic.Id">
                         <div class="content">@Model.Topic.Content</div>
                         <br />
-                        @if (User.Identity!.Name == Model.Topic.Owner.UserName)
+                        @if (User.Identity!.Name == Model.Topic.Owner.UserName || User.IsInRole("Admin"))
                         {
                             <textarea class="edit-topic-area form-control" rows="5" style="display: none;"></textarea>
                             <a class="edit-topic-btn" href="#">
@@ -239,7 +247,7 @@
                             <div class="reply" data-post-id="@post.Id">
                                 <div class="replyContent" style="margin-top: -30px;">@post.Content</div>
                                 <br />
-                                @if (User.Identity!.Name == post.Owner.UserName)
+                                @if (User.Identity!.Name == post.Owner.UserName || User.IsInRole("Admin"))
                                 {
                                     <textarea class="edit-reply-area form-control" rows="3" style="display: none;"></textarea>
                                     <a class="edit-reply-btn" href="#">
