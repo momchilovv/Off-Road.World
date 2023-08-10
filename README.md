@@ -14,16 +14,15 @@
 Stay up-to-date with the latest off-road news. Our News page uses a powerful API to fetch off-road-related articles. Never miss a beat when it comes to off-road adventures.
 
 ### 🚀 Events
-Discover upcoming off-road events from around the world. Each event comes with detailed information, including:
+Discover upcoming off-road events from around the world. Each event comes with detailed information, like:
 
 - Event Name
 - Description
 - Start Date and Time
-- Created Date
-- Number of Participants
-- Event Type
+- Event Type (ex. Enduro, ATV, UTV, etc.)
 - Location (Country, City and Address)
-
+- Number of Participants
+- 
 ### 🛒 Marketplace
 Buy and sell off-road vehicles in our Marketplace. Connect with fellow enthusiasts and find the perfect ride for your next adventure.
 
