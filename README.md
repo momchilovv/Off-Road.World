@@ -45,6 +45,6 @@ An admin has full control over the Off-Road.World platform, with the ability to:
 To get started with Off-Road.World, follow these steps:
 
 1. Clone the repository
-2. Change the API key, you can get your API Key by creating an account <a href="newsapi.org">here</a>. </br>(Note that you need to install the NewsAPI NuGet package.)
+2. Change the API key, you can get your API Key by creating an account <a href="https://newsapi.org">here</a>. </br>(Note that you need to install the NewsAPI NuGet package.)
 3. Change the Connection String for a database that suits you. (I used SQL Server on Docker)
 4. Build & Run the application
