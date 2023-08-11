@@ -10,9 +10,6 @@
 <!-- Features -->
 ## Features
 
-### 🗣️ Languages
-Off-Road World offers bilingual support, allowing you to select either Bulgarian or American English by simply clicking on the respective flag located in the page footer.
-
 ### 📰 News
 Stay up-to-date with the latest off-road news. Our News page uses a powerful API to fetch off-road-related articles. Never miss a beat when it comes to off-road adventures.
 
@@ -31,6 +28,9 @@ Buy and sell off-road vehicles in our Marketplace. Connect with fellow enthusias
 
 ### 💬 Forum
 Engage in discussions with our community on the Off-Road.World forum. Explore different categories, create topics, and contribute to discussions with topics and replies.
+
+### 🗣️ Languages
+Off-Road World offers bilingual support, allowing you to select either Bulgarian or American English by simply clicking on the respective flag located in the page footer.
 
 ## Admin Role
 
