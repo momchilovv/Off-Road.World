@@ -22,7 +22,7 @@ Discover upcoming off-road events from around the world. Each event comes with d
 - Event Type (ex. Enduro, ATV, UTV, etc.)
 - Location (Country, City and Address)
 - Number of Participants
-- 
+
 ### 🛒 Marketplace
 Buy and sell off-road vehicles in our Marketplace. Connect with fellow enthusiasts and find the perfect ride for your next adventure.
 
