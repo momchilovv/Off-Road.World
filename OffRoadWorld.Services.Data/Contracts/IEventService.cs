@@ -1,7 +1,6 @@
 ﻿using OffRoadWorld.Data.Models;
 using OffRoadWorld.Web.ViewModels.Category;
 using OffRoadWorld.Web.ViewModels.Event;
-using OffRoadWorld.Web.ViewModels.Vehicle;
 
 namespace OffRoadWorld.Services.Data.Contracts
 {

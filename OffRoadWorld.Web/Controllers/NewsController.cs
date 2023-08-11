@@ -21,7 +21,7 @@ namespace OffRoadWorld.Web.Controllers
         [AllowAnonymous]
         public IActionResult Index()
         {
-            int displayedArticles = 0;
+            int displayedArticles = 4;
 
             var allNews = new NewsApiClient("");
 

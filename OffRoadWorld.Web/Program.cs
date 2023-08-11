@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -5,9 +6,7 @@ using OffRoadWorld.Data;
 using OffRoadWorld.Data.Models;
 using OffRoadWorld.Services.Data.Contracts;
 using OffRoadWorld.Services.Data.Services;
-using Microsoft.AspNetCore.Identity;
 using OffRoadWorld.Web.Modelbinders;
-using static OffRoadWorld.Common.DataValidations;
 using System.Text.RegularExpressions;
 
 var builder = WebApplication.CreateBuilder(args);
